@@ -10,6 +10,6 @@
   "repository": "https://github.com/classmethod/tsumiki",
   "license": "MIT",
   "keywords": ["ai-development", "sdd", "tdd"],
-  "commands": "./commands",
-  "agents": "./agents"
+  "commands": "./commands/",
+  "agents": ["./agents/symbol-searcher.md"]
 }

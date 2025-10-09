@@ -6,7 +6,19 @@ TsumikiはAI駆動開発のためのフレームワークです。要件定義�
 
 ## インストール
 
-Tsumikiを使用するには、次のnpxコマンドでインストールしてください：
+Tsumikiを使用するには、次のClaude Code Pluginコマンドでインストールしてください：
+
+```bash
+/plugin marketplace add https://github.com/classmethod/tsumiki.git
+```
+
+このコマンドを実行すると、TsumikiのClaude Codeスラッシュコマンドとエージェントが自動的にインストールされます。
+
+**注意**: Claude Code Pluginでインストールした場合、コマンドは `/tsumiki:` プレフィックス付きで実行します（例：`/tsumiki:kairo-requirements`）。
+
+### 非推奨：npxによるインストール
+
+以下の方法でもインストール可能ですが、今後はClaude Code Plugin方式を推奨します：
 
 ```bash
 npx tsumiki install
@@ -56,57 +68,52 @@ Kairoは要件定義から実装までの開発プロセスを自動化・支援
 
 ## クイックスタート
 
+**注意**: Claude Code Pluginでインストールした場合は、各コマンドの先頭に `tsumiki:` を付けてください（例：`/tsumiki:kairo-requirements`）。
+
 ### 包括的な開発フロー
 
 ```bash
 # 1. 技術スタック初期化
-/init-tech-stack
+/tsumiki:init-tech-stack
 
 # 2. 要件定義
-/kairo-requirements
+/tsumiki:kairo-requirements
 
 # 3. 設計
-/kairo-design
+/tsumiki:kairo-design
 
 # 4. タスク分割
-/kairo-tasks
+/tsumiki:kairo-tasks
 
 # 5. 実装
-/kairo-implement
+/tsumiki:kairo-implement
 ```
 
 ### 個別TDDプロセス
 
 ```bash
-/tdd-requirements
-/tdd-testcases
-/tdd-red
-/tdd-green
-/tdd-refactor
-/tdd-verify-complete
+/tsumiki:tdd-requirements
+/tsumiki:tdd-testcases
+/tsumiki:tdd-red
+/tsumiki:tdd-green
+/tsumiki:tdd-refactor
+/tsumiki:tdd-verify-complete
 ```
 
 ### リバースエンジニアリング
 
 ```bash
 # 1. 既存コードからタスク構造を分析
-/rev-tasks
+/tsumiki:rev-tasks
 
 # 2. 設計文書の逆生成（タスク分析後推奨）
-/rev-design
+/tsumiki:rev-design
 
 # 3. テスト仕様書の逆生成（設計文書後推奨）
-/rev-specs
+/tsumiki:rev-specs
 
 # 4. 要件定義書の逆生成（全分析完了後推奨）
-/rev-requirements
-```
-
-### 開発環境のクリーンアップ
-
-```bash
-# 開発環境をクリーンアップ
-/clear
+/tsumiki:rev-requirements
 ```
 
 ## Claude Code以外のツールでtsumikiを使用する
