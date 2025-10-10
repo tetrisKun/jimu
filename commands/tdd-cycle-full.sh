@@ -31,21 +31,21 @@ run_tdd_cycle() {
     local test_case=$1
     
     echo "🔴 RED フェーズ開始..."
-    if ! claude -p "/tdd-red $test_case 不足テストの追加実装" --allowedTools "$ALLOWED_TOOLS" --disallowedTools "$DISALLOWED_TOOLS"; then
+    if ! claude -p "/tsumiki:tdd-red $test_case 不足テストの追加実装" --allowedTools "$ALLOWED_TOOLS" --disallowedTools "$DISALLOWED_TOOLS"; then
         echo -e "${RED}❌ RED フェーズ失敗${NC}"
         exit 1
     fi
     echo -e "${GREEN}✅ RED フェーズ完了${NC}"
     
     echo "🟢 GREEN フェーズ開始..."
-    if ! claude -p "/tdd-green $test_case" --allowedTools "$ALLOWED_TOOLS" --disallowedTools "$DISALLOWED_TOOLS"; then
+    if ! claude -p "/tsumiki:tdd-green $test_case" --allowedTools "$ALLOWED_TOOLS" --disallowedTools "$DISALLOWED_TOOLS"; then
         echo -e "${RED}❌ GREEN フェーズ失敗${NC}"
         exit 1
     fi
     echo -e "${GREEN}✅ GREEN フェーズ完了${NC}"
     
     echo "🔵 REFACTOR フェーズ開始..."
-    if ! claude -p "/tdd-refactor $test_case" --allowedTools "$ALLOWED_TOOLS" --disallowedTools "$DISALLOWED_TOOLS"; then
+    if ! claude -p "/tsumiki:tdd-refactor $test_case" --allowedTools "$ALLOWED_TOOLS" --disallowedTools "$DISALLOWED_TOOLS"; then
         echo -e "${RED}❌ REFACTOR フェーズ失敗${NC}"
         exit 1
     fi
@@ -53,7 +53,7 @@ run_tdd_cycle() {
     
     echo "🔍 VERIFY COMPLETE フェーズ開始..."
     local verify_result
-    verify_result=$(claude -p "/tdd-verify-complete $test_case" --allowedTools "$VERIFY_ALLOWED_TOOLS" --disallowedTools "$VERIFY_DISALLOWED_TOOLS" 2>&1)
+    verify_result=$(claude -p "/tsumiki:tdd-verify-complete $test_case" --allowedTools "$VERIFY_ALLOWED_TOOLS" --disallowedTools "$VERIFY_DISALLOWED_TOOLS" 2>&1)
     local verify_exit_code=$?
     
     if [ $verify_exit_code -ne 0 ]; then
