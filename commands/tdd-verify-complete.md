@@ -229,7 +229,7 @@ TDD開発でテストケースの実装が完全に完了しているかを検�
 - テスト成功率: 100%
 - 品質基準: 達成
 
-次のお勧めステップ: `/tdd-cycle` で次のTDDサイクルを開始します。
+次のお勧めステップ: `/tsumiki:tdd-cycle` で次のTDDサイクルを開始します。
 ```
 
 **メモファイル記録**: 検証結果をメモファイルに自動追記する。
@@ -355,11 +355,11 @@ TDD開発でテストケースの実装が完全に完了しているかを検�
 
 ```bash
 # refactorフェーズ後に自動実行
-/tdd-refactor
+/tsumiki:tdd-refactor
 # ↓ 自動実行
-/tdd-verify-complete
+/tsumiki:tdd-verify-complete
 # ↓ 実装完全なら自動実行
-/tdd-cycle
+/tsumiki:tdd-cycle
 ```
 
 ## 出力形式

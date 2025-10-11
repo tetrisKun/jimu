@@ -282,7 +282,7 @@ function add(firstNumber, secondNumber) {
    - リファクタ品質: 目標が達成されている
    - コード品質: 適切なレベルに向上
 5. **次のステップ表示**: 判定結果に関わらず、次のお勧めコマンドを表示
-   - 「次のお勧めステップ: `/tdd-verify-complete` で完全性検証を実行します。」
+   - 「次のお勧めステップ: `/tsumiki:tdd-verify-complete` で完全性検証を実行します。」
 
 ## 品質判定基準
 

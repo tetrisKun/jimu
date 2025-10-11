@@ -390,7 +390,7 @@ npx cypress run --browser chrome
    - アサーション: 適切
    - 実装方針: 明確
 5. **次のステップ表示**: 判定結果に関わらず、次のお勧めコマンドを表示
-   - 「次のお勧めステップ: `/tdd-green` でGreenフェーズ（最小実装）を開始します。」
+   - 「次のお勧めステップ: `/tsumiki:tdd-green` でGreenフェーズ（最小実装）を開始します。」
 
 ## TDDメモファイル形式
 
@@ -509,4 +509,4 @@ npx cypress run --browser chrome
 - 次のフェーズ「Greenフェーズ（最小実装）」をTODOに追加
 ```
 
-次のステップ: `/tdd-green` でテストを通すための最小限の実装を行います。
+次のステップ: `/tsumiki:tdd-green` でテストを通すための最小限の実装を行います。

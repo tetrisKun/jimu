@@ -139,16 +139,16 @@ description: 設計文書に基づいて実装タスクを1日単位の粒度で
 ## タスクプロセス定義
 
 ### TDDタスク
-1. `tdd-requirements.md` - 詳細要件定義
-2. `tdd-testcases.md` - テストケース作成  
-3. `tdd-red.md` - テスト実装（失敗）
-4. `tdd-green.md` - 最小実装
-5. `tdd-refactor.md` - リファクタリング
-6. `tdd-verify-complete.md` - 品質確認
+1. `/tsumiki:tdd-requirements` - 詳細要件定義
+2. `/tsumiki:tdd-testcases` - テストケース作成
+3. `/tsumiki:tdd-red` - テスト実装（失敗）
+4. `/tsumiki:tdd-green` - 最小実装
+5. `/tsumiki:tdd-refactor` - リファクタリング
+6. `/tsumiki:tdd-verify-complete` - 品質確認
 
 ### DIRECTタスク
-1. `direct-setup.md` - 直接実装・設定
-2. `direct-verify.md` - 動作確認・品質確認
+1. `/tsumiki:direct-setup` - 直接実装・設定
+2. `/tsumiki:direct-verify` - 動作確認・品質確認
 
 ## 実行フロー
 

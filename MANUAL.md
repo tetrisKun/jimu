@@ -4,18 +4,16 @@
 
 ### セットアップ
 
-プロジェクトを使用する前に、まず `commands` ディレクトリの内容をClaudeのコマンドディレクトリにコピーします：
+Claude Code Pluginを使用してTsumikiをインストールします：
 
 ```bash
-# プロジェクトのcommandsディレクトリを.claude/commandsにコピー
-cp -r commands ~/.claude/commands/
-
-# または、プロジェクトディレクトリ内で
-mkdir -p .claude
-cp -r commands .claude/
+/plugin marketplace add https://github.com/classmethod/tsumiki.git
+/plugin install tsumiki@tsumiki 
 ```
 
-#### オプション：プロジェクト固有のルール設定
+**注意**: コマンドは `/tsumiki:` プレフィックス付きで実行します（例：`/tsumiki:kairo-requirements`）。
+
+#### プロジェクト固有のルール設定
 
 セットアップ後、プロジェクト固有のルールや設定を追加できます。
 `docs/rule/{種類1}/{種類2}` ディレクトリ構造でファイルを配置すると、対応するコマンド実行時に自動で読み込まれます。
@@ -40,25 +38,22 @@ TASK作成時に `TDD` と判定している場合で個別にTDDプロセスを
 
 ```
 # TDD要件定義
-/tdd-requirements タスクファイル名　TASK番号
+/tsumiki:tdd-requirements タスクファイル名　TASK番号
 
 # テストケース作成
-/tdd-testcases タスクファイル名　TASK番号
-
-# テスト実装〜TDD完了確認まで自動化する場合
-/tdd-cycle-full.sh  "タスクファイル名　TASK番号"
+/tsumiki:tdd-testcases タスクファイル名　TASK番号
 
 # テスト実装（Red）
-/tdd-red タスクファイル名　TASK番号
+/tsumiki:tdd-red タスクファイル名　TASK番号
 
 # 最小実装（Green）
-/tdd-green タスクファイル名　TASK番号
+/tsumiki:tdd-green タスクファイル名　TASK番号
 
 # リファクタリング
-/tdd-refactor タスクファイル名　TASK番号
+/tsumiki:tdd-refactor タスクファイル名　TASK番号
 
 # TDD完了確認
-/tdd-verify-complete タスクファイル名　TASK番号
+/tsumiki:tdd-verify-complete タスクファイル名　TASK番号
 ```
 
 ### DIRECTコマンド
@@ -67,10 +62,10 @@ TASK作成時に `DIRECT` と判定している場合は、以下のコマンド
 
 ```
 # DIRECT準備
-/direct-setup タスクファイル名　TASK番号
+/tsumiki:direct-setup タスクファイル名　TASK番号
 
 # DIRECT検証
-/direct-verify タスクファイル名　TASK番号
+/tsumiki:direct-verify タスクファイル名　TASK番号
 ```
 
 ### Kairoコマンド（包括的フロー）
@@ -80,9 +75,9 @@ TASK作成時に `DIRECT` と判定している場合は、以下のコマンド
 プロジェクトの技術スタック（フレームワーク、ライブラリ）を初期化します：
 
 ```
-/init-tech-stack
-
+/tsumiki:init-tech-stack
 ```
+
 init-tech-stack は以下を生成します：
 
 生成されたファイル: `/docs/tech-stack.md` 配下
@@ -92,7 +87,7 @@ init-tech-stack は以下を生成します：
 最初に、プロジェクトの要件概要をKairoに伝えます：
 
 ```
-/kairo-requirements 要件概要
+/tsumiki:kairo-requirements 要件概要
 
 # プロンプト例：
 # "ECサイトの商品レビュー機能を実装したい。
@@ -113,7 +108,7 @@ Kairoは以下を生成します：
 要件を確認・修正した後、設計を依頼します：
 
 ```
-/kairo-design（または省略可能）
+/tsumiki:kairo-design（または省略可能）
 
 # 要件を承認済みであることを伝えてください
 ```
@@ -132,12 +127,12 @@ Kairoは以下を生成します：
 設計を確認した後（承認は省略可）、タスク分割を実行します：
 
 ```
-/kairo-tasks
+/tsumiki:kairo-tasks
 
 # 設計を承認したことを伝えてください（または省略可能）
 ```
 
-タスク内容の確認用に `/kairo-task-verify` を実行することをお勧めします。
+タスク内容の確認用に `/tsumiki:kairo-task-verify` を実行することをお勧めします。
 
 Kairoは以下を生成します：
 - 依存関係を考慮したタスク一覧
@@ -153,10 +148,10 @@ Kairoは以下を生成します：
 
 ```
 # 全タスクを順番に実装
-/kairo-implement
+/tsumiki:kairo-implement
 
 # 特定のタスクのみ実装
-/kairo-implement  タスクファイル名　TASK番号
+/tsumiki:kairo-implement  タスクファイル名　TASK番号
 # "TASK-101を実装してください"
 ```
 
@@ -174,16 +169,16 @@ Kairoは各タスクに対して内部的にTDDコマンドを使用して以下
 
 ```
 # 既存コードからタスク構造を分析
-/rev-tasks
+/tsumiki:rev-tasks
 
 # 設計文書の逆生成（タスク分析後推奨）
-/rev-design
+/tsumiki:rev-design
 
 # テスト仕様書の逆生成（設計文書後推奨）
-/rev-specs
+/tsumiki:rev-specs
 
 # 要件定義書の逆生成（全分析完了後推奨）
-/rev-requirements
+/tsumiki:rev-requirements
 ```
 
 #### リバースエンジニアリングの詳細
@@ -267,16 +262,16 @@ Kairoは各タスクに対して内部的にTDDコマンドを使用して以下
 
 ```bash
 # プロジェクト全体の逆解析
-/rev-tasks
+/tsumiki:rev-tasks
 # → タスク構造を把握
 
-/rev-design
+/tsumiki:rev-design
 # → アーキテクチャと設計を文書化
 
-/rev-specs
+/tsumiki:rev-specs
 # → テスト状況を分析して不足テストを特定
 
-/rev-requirements
+/tsumiki:rev-requirements
 # → 最終的に要件定義書を生成
 ```
 
@@ -308,15 +303,15 @@ Kairoは各タスクに対して内部的にTDDコマンドを使用して以下
 
 ```mermaid
 flowchart TD
-    A[要件概要を伝える] --> B[kairo-requirements]
+    A[要件概要を伝える] --> B[tsumiki:kairo-requirements]
     B --> C{要件を確認}
     C -->|修正必要| B
-    C -->|OK| D[kairo-design]
+    C -->|OK| D[tsumiki:kairo-design]
     D --> E{設計を確認}
     E -->|修正必要| D
-    E -->|OK| F[kairo-tasks]
+    E -->|OK| F[tsumiki:kairo-tasks]
     F --> G{タスクを確認}
-    G -->|OK| H[kairo-implement]
+    G -->|OK| H[tsumiki:kairo-implement]
     H --> I{全タスク完了?}
     I -->|No| H
     I -->|Yes| J[プロジェクト完了]

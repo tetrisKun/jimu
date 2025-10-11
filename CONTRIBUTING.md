@@ -52,26 +52,11 @@ git checkout -b feature/your-feature-name
 3. コード品質チェックを実行します：
 
 ```bash
-# 型チェック
-pnpm typecheck
-
-# コードチェック
-pnpm check
-
-# 自動修正
-pnpm fix
-
 # 機密情報チェック
 pnpm secretlint
 ```
 
-4. ビルドテストを実行します：
-
-```bash
-pnpm build:run
-```
-
-5. 変更をコミットします：
+4. 変更をコミットします：
 
 ```bash
 git add .
@@ -104,31 +89,24 @@ docs: update README with new command examples
 Pre-commitフックで以下が自動実行されます：
 
 - **secretlint**: 機密情報（APIキー、パスワードなど）の混入チェック
-- **typecheck**: TypeScriptの型チェック
-- **fix**: Biomeによるコードの自動修正
 
 ### 手動チェック
 
 変更前に以下のコマンドを実行してください：
 
 ```bash
-# 全てのチェックを実行
-pnpm typecheck && pnpm check && pnpm secretlint
-
-# コードの自動修正
-pnpm fix
+# 機密情報チェック
+pnpm secretlint
 ```
 
 ## プロジェクト構造
 
 ```
 tsumiki/
-├── src/
-│   ├── cli.ts              # CLIエントリーポイント
-│   └── commands/
-│       └── install.tsx     # インストールコマンドのUI実装
+├── .claude-plugin/         # Claude Code Plugin設定
 ├── commands/               # コマンドテンプレート（.md, .sh）
-├── dist/                  # ビルド出力
+├── agents/                 # エージェント定義（.md）
+├── book/                   # ドキュメント
 ├── package.json
 ├── CLAUDE.md              # プロジェクト指示書
 └── README.md
@@ -153,7 +131,6 @@ git push origin feature/your-feature-name
 - [ ] 変更内容が明確に説明されている
 - [ ] 関連するIssueがリンクされている（該当する場合）
 - [ ] コード品質チェックが通っている
-- [ ] ビルドが成功している
 - [ ] 機密情報が含まれていない
 
 ## Issue報告

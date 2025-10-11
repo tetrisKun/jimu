@@ -61,57 +61,57 @@ description: 分割されたタスクを順番に、またはユーザが指定�
 
    ### A. **TDDプロセス**（コード実装タスク用）
 
-   a. **要件定義** - `@task general-purpose tdd-requirements.md`
+   a. **要件定義** - `@task general-purpose /tsumiki:tdd-requirements`
    ```
    Task実行: TDD要件定義フェーズ
    目的: タスクの詳細要件を記述し、受け入れ基準を明確化する
-   コマンド: tdd-requirements.md
+   コマンド: /tsumiki:tdd-requirements
    実行方式: 個別Task実行
    ```
 
-   b. **テストケース作成** - `@task general-purpose tdd-testcases.md`
+   b. **テストケース作成** - `@task general-purpose /tsumiki:tdd-testcases`
    ```
    Task実行: TDDテストケース作成フェーズ
    目的: 単体テストケースを作成し、エッジケースを考慮する
-   コマンド: tdd-testcases.md
+   コマンド: /tsumiki:tdd-testcases
    実行方式: 個別Task実行
    ```
 
-   c. **テスト実装** - `@task general-purpose tdd-red.md`
+   c. **テスト実装** - `@task general-purpose /tsumiki:tdd-red`
    ```
    Task実行: TDDレッドフェーズ
    目的: 失敗するテストを実装し、テストが失敗することを確認する
-   コマンド: tdd-red.md
+   コマンド: /tsumiki:tdd-red
    実行方式: 個別Task実行
    ```
 
-   d. **最小実装** - `@task general-purpose tdd-green.md`
+   d. **最小実装** - `@task general-purpose /tsumiki:tdd-green`
    ```
    Task実行: TDDグリーンフェーズ
    目的: テストが通る最小限の実装を行い、過度な実装を避ける
-   コマンド: tdd-green.md
+   コマンド: /tsumiki:tdd-green
    実行方式: 個別Task実行
    ```
 
-   e. **リファクタリング** - `@task general-purpose tdd-refactor.md`
+   e. **リファクタリング** - `@task general-purpose /tsumiki:tdd-refactor`
    ```
    Task実行: TDDリファクタリングフェーズ
    目的: コードの品質向上と保守性の改善を行う
-   コマンド: tdd-refactor.md
+   コマンド: /tsumiki:tdd-refactor
    実行方式: 個別Task実行
    ```
 
-   f. **品質確認** - `@task general-purpose tdd-verify-complete.md`
+   f. **品質確認** - `@task general-purpose /tsumiki:tdd-verify-complete`
    ```
    Task実行: TDD品質確認フェーズ
    目的: 実装の完成度を確認し、不足があればc-fを繰り返す
-   コマンド: tdd-verify-complete.md
+   コマンド: /tsumiki:tdd-verify-complete
    実行方式: 個別Task実行
    ```
 
    ### B. **直接作業プロセス**（準備作業タスク用）
 
-   a. **準備作業の実行** - `@task general-purpose direct-setup.md`
+   a. **準備作業の実行** - `@task general-purpose /tsumiki:direct-setup`
    ```
    Task実行: 直接作業実行フェーズ
    目的: ディレクトリ作成、設定ファイル作成、依存関係のインストール、環境設定を行う
@@ -123,7 +123,7 @@ description: 分割されたタスクを順番に、またはユーザが指定�
    実行方式: 個別Task実行
    ```
 
-   b. **作業結果の確認** - `@task general-purpose direct-verify.md`
+   b. **作業結果の確認** - `@task general-purpose /tsumiki:direct-verify`
    ```
    Task実行: 直接作業確認フェーズ
    目的: 作業完了の検証と成果物確認を行う
@@ -225,16 +225,16 @@ $ claude code kairo-implement --status
 
 ```bash
 # TDDプロセスの場合
-@task general-purpose tdd-requirements.md
-@task general-purpose tdd-testcases.md
-@task general-purpose tdd-red.md
-@task general-purpose tdd-green.md
-@task general-purpose tdd-refactor.md
-@task general-purpose tdd-verify-complete.md
+@task general-purpose /tsumiki:tdd-requirements
+@task general-purpose /tsumiki:tdd-testcases
+@task general-purpose /tsumiki:tdd-red
+@task general-purpose /tsumiki:tdd-green
+@task general-purpose /tsumiki:tdd-refactor
+@task general-purpose /tsumiki:tdd-verify-complete
 
 # 直接作業プロセスの場合
-@task general-purpose direct-setup.md
-@task general-purpose direct-verify.md
+@task general-purpose /tsumiki:direct-setup
+@task general-purpose /tsumiki:direct-verify
 ```
 
 ## 実装時の注意事項
@@ -300,22 +300,22 @@ $ claude code kairo-implement --status
 ### 各ステップ完了時（TDD）
 
 ```
-✅ Task 1/6: @task tdd-requirements 完了
+✅ Task 1/6: @task /tsumiki:tdd-requirements 完了
    ファイル: docs/implements/{要件名}/{{task_id}}/{要件名}-requirements.md
    Task実行結果: 要件定義書作成完了
 
-🏃 Task 2/6: @task tdd-testcases 実行中...
+🏃 Task 2/6: @task /tsumiki:tdd-testcases 実行中...
    Task実行: TDDテストケース作成フェーズを開始
 ```
 
 ### 各ステップ完了時（直接作業）
 
 ```
-✅ Task 1/2: @task direct-work-execute 完了
+✅ Task 1/2: @task /tsumiki:direct-setup 完了
    作成ファイル: 8個、設定更新: 3個
    Task実行結果: 準備作業実行完了
 
-🏃 Task 2/2: @task direct-work-verify 実行中...
+🏃 Task 2/2: @task /tsumiki:direct-verify 実行中...
    Task実行: 直接作業確認フェーズを開始
 ```
 

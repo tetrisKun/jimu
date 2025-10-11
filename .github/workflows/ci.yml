@@ -36,14 +36,5 @@ jobs:
             exit 1
           fi
 
-      - name: Run check
-        run: pnpm check
-
       - name: Run secretlint
         run: pnpm secretlint
-
-      - name: Run typecheck
-        run: pnpm typecheck
-
-      - name: Build project
-        run: pnpm build

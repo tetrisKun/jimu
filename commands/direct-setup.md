@@ -143,7 +143,7 @@ psql -d mydb -f database-schema.sql
 
 ## 次のステップ
 
-- `direct-verify.md` を実行して設定を確認
+- `/tsumiki:direct-verify` を実行して設定を確認
 - 必要に応じて設定の調整を実施
 
 ## 実行後の確認
