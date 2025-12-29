@@ -1,357 +1,357 @@
-# Tsumiki マニュアル
+# Tsumiki 手册
 
 ## 使用方法
 
-### セットアップ
+### 设置
 
-Claude Code Pluginを使用してTsumikiをインストールします：
+使用 Claude Code Plugin 安装 Tsumiki:
 
 ```bash
 /plugin marketplace add https://github.com/classmethod/tsumiki.git
-/plugin install tsumiki@tsumiki 
+/plugin install tsumiki@tsumiki
 ```
 
-**注意**: コマンドは `/tsumiki:` プレフィックス付きで実行します（例：`/tsumiki:kairo-requirements`）。
+**注意**: 命令使用 `/tsumiki:` 前缀执行(例: `/tsumiki:kairo-requirements`)。
 
-#### プロジェクト固有のルール設定
+#### 项目特定规则设置
 
-セットアップ後、プロジェクト固有のルールや設定を追加できます。
-`docs/rule/{種類1}/{種類2}` ディレクトリ構造でファイルを配置すると、対応するコマンド実行時に自動で読み込まれます。
+设置后,可以添加项目特定的规则和配置。
+如果在 `docs/rule/{类型1}/{类型2}` 目录结构中放置文件,会在执行对应命令时自动加载。
 
-**読み込まれるディレクトリ階層**:
-- `docs/rule/` （共通ルール）
-- `docs/rule/{種類1}/` （種類レベルのルール）
-- `docs/rule/{種類1}/{種類2}/` （詳細レベルのルール）
+**加载的目录层次**:
+- `docs/rule/` (公共规则)
+- `docs/rule/{类型1}/` (类型级别规则)
+- `docs/rule/{类型1}/{类型2}/` (详细级别规则)
 
-**例**: `kairo-requirements` 実行時
+**例**: 执行 `kairo-requirements` 时
 ```
-docs/rule/                    # 全コマンド共通ルール
-docs/rule/kairo/              # kairoコマンド共通ルール  
-docs/rule/kairo/requirements/ # kairo-requirements専用ルール
-```
-
-これらのディレクトリ内の `.md` ファイルは、コマンド実行時にコンテキストとして自動読み込みされます。
-
-### TDDコマンド
-
-TASK作成時に `TDD` と判定している場合で個別にTDDプロセスを実行したい場合は、以下のコマンドを順次実行できます：
-
-```
-# TDD要件定義
-/tsumiki:tdd-requirements タスクファイル名　TASK番号
-
-# テストケース作成
-/tsumiki:tdd-testcases タスクファイル名　TASK番号
-
-# テスト実装（Red）
-/tsumiki:tdd-red タスクファイル名　TASK番号
-
-# 最小実装（Green）
-/tsumiki:tdd-green タスクファイル名　TASK番号
-
-# リファクタリング
-/tsumiki:tdd-refactor タスクファイル名　TASK番号
-
-# TDD完了確認
-/tsumiki:tdd-verify-complete タスクファイル名　TASK番号
+docs/rule/                    # 所有命令公共规则
+docs/rule/kairo/              # kairo 命令公共规则
+docs/rule/kairo/requirements/ # kairo-requirements 专用规则
 ```
 
-### DIRECTコマンド
+这些目录内的 `.md` 文件会在命令执行时作为上下文自动加载。
 
-TASK作成時に `DIRECT` と判定している場合は、以下のコマンドを順次実行できます：
+### TDD 命令
+
+如果在创建 TASK 时判定为 `TDD`,想单独执行 TDD 流程时,可以依次执行以下命令:
 
 ```
-# DIRECT準備
-/tsumiki:direct-setup タスクファイル名　TASK番号
+# TDD 需求定义
+/tsumiki:tdd-requirements 任务文件名　TASK编号
 
-# DIRECT検証
-/tsumiki:direct-verify タスクファイル名　TASK番号
+# 创建测试用例
+/tsumiki:tdd-testcases 任务文件名　TASK编号
+
+# 测试实现(Red)
+/tsumiki:tdd-red 任务文件名　TASK编号
+
+# 最小实现(Green)
+/tsumiki:tdd-green 任务文件名　TASK编号
+
+# 重构
+/tsumiki:tdd-refactor 任务文件名　TASK编号
+
+# TDD 完成确认
+/tsumiki:tdd-verify-complete 任务文件名　TASK编号
 ```
 
-### Kairoコマンド（包括的フロー）
+### DIRECT 命令
 
-#### 1. 技術スタック初期化
+如果在创建 TASK 时判定为 `DIRECT`,可以依次执行以下命令:
 
-プロジェクトの技術スタック（フレームワーク、ライブラリ）を初期化します：
+```
+# DIRECT 准备
+/tsumiki:direct-setup 任务文件名　TASK编号
+
+# DIRECT 验证
+/tsumiki:direct-verify 任务文件名　TASK编号
+```
+
+### Kairo 命令(综合流程)
+
+#### 1. 技术栈初始化
+
+初始化项目的技术栈(框架、库):
 
 ```
 /tsumiki:init-tech-stack
 ```
 
-init-tech-stack は以下を生成します：
+init-tech-stack 生成以下内容:
 
-生成されたファイル: `/docs/tech-stack.md` 配下
+生成的文件: `/docs/tech-stack.md` 下
 
-#### 2. 要件定義
+#### 2. 需求定义
 
-最初に、プロジェクトの要件概要をKairoに伝えます：
-
-```
-/tsumiki:kairo-requirements 要件概要
-
-# プロンプト例：
-# "ECサイトの商品レビュー機能を実装したい。
-#  ユーザーは商品に対して5段階評価とコメントを投稿でき、
-#  他のユーザーのレビューを参照できる。"
-```
-
-Kairoは以下を生成します：
-- ユーザーストーリー
-- EARS記法による詳細な要件定義
-- エッジケースの考慮
-- 受け入れ基準
-
-生成されたファイル: `/docs/spec/{要件名}-requirements.md`
-
-#### 3. 設計
-
-要件を確認・修正した後、設計を依頼します：
+首先,向 Kairo 传达项目的需求概要:
 
 ```
-/tsumiki:kairo-design（または省略可能）
+/tsumiki:kairo-requirements 需求概要
 
-# 要件を承認済みであることを伝えてください
+# 提示示例:
+# "想实现电商网站的商品评价功能。
+#  用户可以对商品进行5星评分和评论,
+#  可以查看其他用户的评价。"
 ```
 
-Kairoは以下を生成します：
-- アーキテクチャ設計書
-- データフロー図（Mermaid）
-- TypeScriptインターフェース定義
-- データベーススキーマ
-- APIエンドポイント仕様
+Kairo 生成以下内容:
+- 用户故事
+- 使用 EARS 记法的详细需求定义
+- 边缘案例考虑
+- 验收标准
 
-生成されたファイル: `/docs/design/{要件名}/` 配下
+生成的文件: `/docs/spec/{需求名}-requirements.md`
 
-#### 4. タスク分割
+#### 3. 设计
 
-設計を確認した後（承認は省略可）、タスク分割を実行します：
+确认·修改需求后,请求设计:
+
+```
+/tsumiki:kairo-design(或可省略)
+
+# 请告知已批准需求
+```
+
+Kairo 生成以下内容:
+- 架构设计文档
+- 数据流图(Mermaid)
+- TypeScript 接口定义
+- 数据库模式
+- API 端点规范
+
+生成的文件: `/docs/design/{需求名}/` 下
+
+#### 4. 任务分割
+
+确认设计后(可省略批准),执行任务分割:
 
 ```
 /tsumiki:kairo-tasks
 
-# 設計を承認したことを伝えてください（または省略可能）
+# 请告知已批准设计(或可省略)
 ```
 
-タスク内容の確認用に `/tsumiki:kairo-task-verify` を実行することをお勧めします。
+建议执行 `/tsumiki:kairo-task-verify` 来确认任务内容。
 
-Kairoは以下を生成します：
-- 依存関係を考慮したタスク一覧
-- 各タスクの詳細（テスト要件、UI/UX要件含む）
-- 実行順序とスケジュール
+Kairo 生成以下内容:
+- 考虑依赖关系的任务列表
+- 各任务的详细信息(包括测试需求、UI/UX需求)
+- 执行顺序和进度安排
 
-生成されたファイル: `/docs/tasks/{要件名}-tasks.md`
+生成的文件: `/docs/tasks/{需求名}-tasks.md`
 
-#### 5. 実装
+#### 5. 实现
 
-タスクを確認した後、実装を開始します：
-（TDDサイクルまたはDIRECTを手動実行をお勧めします
+确认任务后,开始实现:
+(建议手动执行 TDD 循环或 DIRECT)
 
 ```
-# 全タスクを順番に実装
+# 按顺序实现所有任务
 /tsumiki:kairo-implement
 
-# 特定のタスクのみ実装
-/tsumiki:kairo-implement  タスクファイル名　TASK番号
-# "TASK-101を実装してください"
+# 只实现特定任务
+/tsumiki:kairo-implement  任务文件名　TASK编号
+# "请实现TASK-101"
 ```
 
-Kairoは各タスクに対して内部的にTDDコマンドを使用して以下のプロセスを実行します：
-1. TDD要件定義（tdd-requirements）
-2. テストケース作成（tdd-testcases）
-3. テスト実装（tdd-red）
-4. 最小実装（tdd-green）
-5. リファクタリング（tdd-refactor）
-6. TDD完了確認（tdd-verify-complete）
+Kairo 对每个任务内部使用 TDD 命令执行以下流程:
+1. TDD 需求定义(tdd-requirements)
+2. 创建测试用例(tdd-testcases)
+3. 测试实现(tdd-red)
+4. 最小实现(tdd-green)
+5. 重构(tdd-refactor)
+6. TDD 完成确认(tdd-verify-complete)
 
-### リバースエンジニアリングコマンド
+### 逆向工程命令
 
-既存のコードベースから各種文書を逆生成する場合は、以下のコマンドを順次実行できます：
+如果要从现有代码库逆向生成各种文档,可以依次执行以下命令:
 
 ```
-# 既存コードからタスク構造を分析
+# 从现有代码分析任务结构
 /tsumiki:rev-tasks
 
-# 設計文書の逆生成（タスク分析後推奨）
+# 逆向生成设计文档(建议在任务分析后执行)
 /tsumiki:rev-design
 
-# テスト仕様書の逆生成（設計文書後推奨）
+# 逆向生成测试规范(建议在设计文档后执行)
 /tsumiki:rev-specs
 
-# 要件定義書の逆生成（全分析完了後推奨）
+# 逆向生成需求定义书(建议在完成所有分析后执行)
 /tsumiki:rev-requirements
 ```
 
-#### リバースエンジニアリングの詳細
+#### 逆向工程详情
 
-##### 概要
+##### 概述
 
-リバースエンジニアリングコマンドは、既存のコードベースを分析し、実装から逆算して各種ドキュメントを生成します。
+逆向工程命令分析现有代码库,从实现逆向推导生成各种文档。
 
-##### 推奨実行順序
+##### 推荐执行顺序
 
-1. **rev-tasks** - コードベース全体を分析してタスク構造を把握
-2. **rev-design** - アーキテクチャと設計文書を生成
-3. **rev-specs** - テスト仕様書とテストケースを生成
-4. **rev-requirements** - 要件定義書を最終的に生成
+1. **rev-tasks** - 分析整个代码库掌握任务结构
+2. **rev-design** - 生成架构和设计文档
+3. **rev-specs** - 生成测试规范和测试用例
+4. **rev-requirements** - 最后生成需求定义书
 
-##### 各コマンドの詳細
+##### 各命令详情
 
-###### rev-tasks（タスク構造分析）
+###### rev-tasks(任务结构分析)
 
-**目的**: 既存コードから実装済み機能をタスクとして抽出・整理
+**目的**: 从现有代码提取·整理已实现的功能作为任务
 
-**生成されるファイル**:
-- `docs/reverse/{プロジェクト名}-discovered-tasks.md`
-
-**分析内容**:
-- コードベース構造の把握
-- 実装済み機能の特定
-- API エンドポイントの抽出
-- データベース構造の分析
-- タスクの依存関係推定
-
-###### rev-design（設計文書逆生成）
-
-**目的**: 実装されたアーキテクチャから技術設計文書を生成
-
-**生成されるファイル**:
-- `docs/reverse/{プロジェクト名}-architecture.md`
-- `docs/reverse/{プロジェクト名}-dataflow.md`
-- `docs/reverse/{プロジェクト名}-api-specs.md`
-- `docs/reverse/{プロジェクト名}-database.md`
-- `docs/reverse/{プロジェクト名}-interfaces.ts`
+**生成的文件**:
+- `docs/reverse/{项目名}-discovered-tasks.md`
 
 **分析内容**:
-- アーキテクチャパターンの特定
-- データフローの抽出
-- API仕様の抽出
-- データベーススキーマの逆生成
-- TypeScript型定義の整理
+- 掌握代码库结构
+- 识别已实现功能
+- 提取 API 端点
+- 分析数据库结构
+- 推测任务依赖关系
 
-###### rev-specs（テスト仕様書逆生成）
+###### rev-design(逆向生成设计文档)
 
-**目的**: 実装コードからテストケースと仕様書を逆生成
+**目的**: 从已实现的架构生成技术设计文档
 
-**生成されるファイル**:
-- `docs/reverse/{プロジェクト名}-test-specs.md`
-- `docs/reverse/{プロジェクト名}-test-cases.md`
-- `docs/reverse/tests/` - 生成されたテストコード
-
-**分析内容**:
-- 既存テストの分析
-- 不足テストケースの特定
-- API テストケースの生成
-- UI コンポーネントテストの生成
-- パフォーマンス・セキュリティテストの提案
-
-###### rev-requirements（要件定義書逆生成）
-
-**目的**: 実装機能から要件定義書をEARS記法で逆生成
-
-**生成されるファイル**:
-- `docs/reverse/{プロジェクト名}-requirements.md`
+**生成的文件**:
+- `docs/reverse/{项目名}-architecture.md`
+- `docs/reverse/{项目名}-dataflow.md`
+- `docs/reverse/{项目名}-api-specs.md`
+- `docs/reverse/{项目名}-database.md`
+- `docs/reverse/{项目名}-interfaces.ts`
 
 **分析内容**:
-- ユーザーストーリーの逆算
-- EARS記法による要件分類
-- 非機能要件の推定
-- エッジケースの特定
-- 受け入れ基準の生成
+- 识别架构模式
+- 提取数据流
+- 提取 API 规范
+- 逆向生成数据库模式
+- 整理 TypeScript 类型定义
 
-##### 使用例
+###### rev-specs(逆向生成测试规范)
+
+**目的**: 从实现代码逆向生成测试用例和规范
+
+**生成的文件**:
+- `docs/reverse/{项目名}-test-specs.md`
+- `docs/reverse/{项目名}-test-cases.md`
+- `docs/reverse/tests/` - 生成的测试代码
+
+**分析内容**:
+- 分析现有测试
+- 识别不足的测试用例
+- 生成 API 测试用例
+- 生成 UI 组件测试
+- 建议性能·安全测试
+
+###### rev-requirements(逆向生成需求定义书)
+
+**目的**: 使用 EARS 记法从实现功能逆向生成需求定义书
+
+**生成的文件**:
+- `docs/reverse/{项目名}-requirements.md`
+
+**分析内容**:
+- 逆推用户故事
+- 使用 EARS 记法分类需求
+- 推测非功能需求
+- 识别边缘案例
+- 生成验收标准
+
+##### 使用示例
 
 ```bash
-# プロジェクト全体の逆解析
+# 逆向分析整个项目
 /tsumiki:rev-tasks
-# → タスク構造を把握
+# → 掌握任务结构
 
 /tsumiki:rev-design
-# → アーキテクチャと設計を文書化
+# → 文档化架构和设计
 
 /tsumiki:rev-specs
-# → テスト状況を分析して不足テストを特定
+# → 分析测试状况识别不足的测试
 
 /tsumiki:rev-requirements
-# → 最終的に要件定義書を生成
+# → 最后生成需求定义书
 ```
 
-##### 注意事項
+##### 注意事项
 
-- 各ステップで生成された内容は必ずレビューしてください
-- 推定された要件は実際のビジネス要件と異なる場合があります
-- テストケースは実装状況から推定されるため、完全ではない可能性があります
+- 请务必审查每个步骤生成的内容
+- 推测的需求可能与实际业务需求不同
+- 测试用例是从实现状况推测的,可能不完整
 
-## ディレクトリ構造
+## 目录结构
 
 ```
 ./
 ├── .claude/
-│   └── commands/           # Kairoコマンド
+│   └── commands/           # Kairo 命令
 ├── docs/
-│   ├── implements/        # 実装コード
-│   │   └── {タスクID}/
-│   ├── spec/              # 要件定義書
-│   ├── design/            # 設計文書
-│   ├── tasks/             # タスク一覧
-│   └── reverse/           # リバース文書
-├── backend/              # バックエンドコード
-├── frontend/             # フロントエンドコード
-└── database/             # データベース関連
+│   ├── implements/        # 实现代码
+│   │   └── {任务ID}/
+│   ├── spec/              # 需求定义书
+│   ├── design/            # 设计文档
+│   ├── tasks/             # 任务列表
+│   └── reverse/           # 逆向文档
+├── backend/              # 后端代码
+├── frontend/             # 前端代码
+└── database/             # 数据库相关
 ```
 
-## ワークフロー例
+## 工作流示例
 
 ```mermaid
 flowchart TD
-    A[要件概要を伝える] --> B[tsumiki:kairo-requirements]
-    B --> C{要件を確認}
-    C -->|修正必要| B
+    A[传达需求概要] --> B[tsumiki:kairo-requirements]
+    B --> C{确认需求}
+    C -->|需要修改| B
     C -->|OK| D[tsumiki:kairo-design]
-    D --> E{設計を確認}
-    E -->|修正必要| D
+    D --> E{确认设计}
+    E -->|需要修改| D
     E -->|OK| F[tsumiki:kairo-tasks]
-    F --> G{タスクを確認}
+    F --> G{确认任务}
     G -->|OK| H[tsumiki:kairo-implement]
-    H --> I{全タスク完了?}
+    H --> I{全部任务完成?}
     I -->|No| H
-    I -->|Yes| J[プロジェクト完了]
+    I -->|Yes| J[项目完成]
 ```
 
-## 利点
+## 优势
 
-1. **一貫性のある開発プロセス**
-   - 要件から実装まで統一されたフロー
-   - EARS記法による明確な要件定義
+1. **一致的开发流程**
+   - 从需求到实现的统一流程
+   - 使用 EARS 记法明确定义需求
 
-2. **品質の担保**
-   - TDDコマンドによる堅牢な実装
-   - 包括的なテストカバレッジ
+2. **保证质量**
+   - 通过 TDD 命令实现稳健的实现
+   - 全面的测试覆盖率
 
-3. **効率的な開発**
-   - 自動的なタスク分割と優先順位付け
-   - 依存関係の可視化
+3. **高效开发**
+   - 自动的任务分割和优先级排序
+   - 可视化依赖关系
 
-4. **包括的なドキュメント**
-   - 要件、設計、実装が全てドキュメント化
-   - 後からの参照が容易
+4. **全面的文档**
+   - 需求、设计、实现全部文档化
+   - 便于后期参考
 
-## 注意事項
+## 注意事项
 
-- 各ステップでユーザーの確認を求めます
-- 生成された内容は必ずレビューしてください
-- プロジェクトの特性に応じて調整が必要な場合があります
+- 每个步骤都会请求用户确认
+- 请务必审查生成的内容
+- 可能需要根据项目特性进行调整
 
-## トラブルシューティング
+## 故障排除
 
-### Q: 要件が複雑すぎる場合は？
-A: 要件を複数の小さな機能に分割して、それぞれに対してKairoを実行してください。
+### Q: 需求太复杂怎么办?
+A: 请将需求分割为多个小功能,对每个功能执行 Kairo。
 
-### Q: 既存のコードベースに適用できる？
-A: はい。既存のコードを分析した上で、新機能の追加や改修に使用できます。
+### Q: 可以应用于现有代码库吗?
+A: 可以。在分析现有代码的基础上,可用于添加新功能或修改。
 
-### Q: カスタマイズは可能？
-A: 各コマンドファイルを編集することで、プロジェクトに合わせたカスタマイズが可能です。
+### Q: 可以自定义吗?
+A: 可以。通过编辑各命令文件,可以进行适合项目的自定义。
 
-## サポート
+## 支持
 
-問題や質問がある場合は、プロジェクトのイシュートラッカーに報告してください。
+如有问题或疑问,请在项目的 Issue 追踪器中报告。
