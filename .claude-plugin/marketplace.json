@@ -1,5 +1,5 @@
 {
-  "name": "tsumiki-cn",
+  "name": "jimu",
   "owner": {
     "name": "makoto kuroeda",
     "email": "kuroeda.makoto@classmethod.jp",
@@ -19,8 +19,8 @@
         "name": "makoto kuroeda",
         "email": "kuroeda.makoto@classmethod.jp"
       },
-      "homepage": "https://github.com/tetrisKun/tsumiki-cn",
-      "repository": "https://github.com/tetrisKun/tsumiki-cn",
+      "homepage": "https://github.com/tetrisKun/jimu",
+      "repository": "https://github.com/tetrisKun/jimu",
       "license": "MIT",
       "keywords": ["ai-development", "sdd", "tdd"]
     }

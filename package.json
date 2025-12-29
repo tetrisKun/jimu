@@ -1,24 +1,24 @@
 {
-  "name": "tsumiki-cn",
+  "name": "jimu",
   "private": false,
   "version": "0.0.7",
   "description": "AI-driven development framework for Claude Code",
   "keywords": [
     "tsumiki",
-    "tsumiki-cn",
+    "jimu",
     "claude",
     "claudecode",
     "ai",
     "tdd",
     "plugin"
   ],
-  "homepage": "https://github.com/tetrisKun/tsumiki-cn#readme",
+  "homepage": "https://github.com/tetrisKun/jimu#readme",
   "bugs": {
-    "url": "https://github.com/tetrisKun/tsumiki-cn/issues"
+    "url": "https://github.com/tetrisKun/jimu/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tetrisKun/tsumiki-cn.git"
+    "url": "https://github.com/tetrisKun/jimu.git"
   },
   "license": "MIT",
   "author": {
