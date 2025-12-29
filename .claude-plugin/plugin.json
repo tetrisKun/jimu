@@ -6,8 +6,8 @@
     "name": "makoto kuroeda",
     "email": "kuroeda.makoto@classmethod.jp"
   },
-  "homepage": "https://github.com/classmethod/tsumiki",
-  "repository": "https://github.com/classmethod/tsumiki",
+  "homepage": "https://github.com/tetrisKun/tsumiki-cn",
+  "repository": "https://github.com/tetrisKun/tsumiki-cn",
   "license": "MIT",
   "keywords": ["ai-development", "sdd", "tdd"],
   "commands": "./commands/",
