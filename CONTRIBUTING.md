@@ -1,172 +1,172 @@
-# コントリビューションガイド
+# 贡献指南
 
-Tsumikiプロジェクトへのコントリビューションをありがとうございます！このガイドでは、プロジェクトに貢献する方法について説明します。
+感谢您对 Tsumiki 项目的贡献!本指南将说明如何为项目做出贡献。
 
-## 開発環境のセットアップ
+## 开发环境设置
 
-### 必要な環境
+### 必需环境
 
-- Node.js 18.0.0以上
-- pnpm 10.13.1以上
+- Node.js 18.0.0 以上
+- pnpm 10.13.1 以上
 
-### セットアップ手順
+### 设置步骤
 
-1. リポジトリをフォークしてクローンします：
+1. Fork 并克隆仓库:
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/tsumiki.git
 cd tsumiki
 ```
 
-2. 依存関係をインストールします：
+2. 安装依赖:
 
 ```bash
 pnpm install
 ```
 
-3. pre-commitフックをセットアップします：
+3. 设置 pre-commit 钩子:
 
 ```bash
 pnpm prepare
 ```
 
-## 開発ワークフロー
+## 开发工作流
 
-### ブランチ戦略
+### 分支策略
 
-- `main`ブランチ：安定版のコード
-- 機能開発：`feature/機能名`
-- バグ修正：`bugfix/バグ名`
-- ホットフィックス：`hotfix/修正内容`
+- `main` 分支:稳定版本代码
+- 功能开发:`feature/功能名`
+- Bug 修复:`bugfix/Bug名`
+- 热修复:`hotfix/修复内容`
 
-### 開発手順
+### 开发步骤
 
-1. 新しいブランチを作成します：
+1. 创建新分支:
 
 ```bash
 git checkout -b feature/your-feature-name
 ```
 
-2. コードを変更します
+2. 修改代码
 
-3. コード品質チェックを実行します：
+3. 执行代码质量检查:
 
 ```bash
-# 機密情報チェック
+# 敏感信息检查
 pnpm secretlint
 ```
 
-4. 変更をコミットします：
+4. 提交更改:
 
 ```bash
 git add .
-git commit -m "feat: 新機能の追加"
+git commit -m "feat: 添加新功能"
 ```
 
-## コミットメッセージ規約
+## 提交信息规范
 
-[Conventional Commits](https://www.conventionalcommits.org/)形式を使用してください：
+请使用 [Conventional Commits](https://www.conventionalcommits.org/) 格式:
 
-- `feat:` 新機能
-- `fix:` バグ修正
-- `docs:` ドキュメント変更
-- `style:` コードスタイル変更（機能に影響しない）
-- `refactor:` リファクタリング
-- `test:` テスト追加・修正
-- `chore:` ビルドプロセスやツール変更
+- `feat:` 新功能
+- `fix:` Bug 修复
+- `docs:` 文档更改
+- `style:` 代码样式更改(不影响功能)
+- `refactor:` 重构
+- `test:` 测试添加/修改
+- `chore:` 构建流程或工具更改
 
-例：
+示例:
 ```
 feat: add new install command for .sh files
 fix: resolve path handling issue in install command
 docs: update README with new command examples
 ```
 
-## コード品質基準
+## 代码质量标准
 
-### 自動チェック
+### 自动检查
 
-Pre-commitフックで以下が自動実行されます：
+Pre-commit 钩子会自动执行以下操作:
 
-- **secretlint**: 機密情報（APIキー、パスワードなど）の混入チェック
+- **secretlint**: 检查敏感信息(API 密钥、密码等)是否混入
 
-### 手動チェック
+### 手动检查
 
-変更前に以下のコマンドを実行してください：
+更改前请执行以下命令:
 
 ```bash
-# 機密情報チェック
+# 敏感信息检查
 pnpm secretlint
 ```
 
-## プロジェクト構造
+## 项目结构
 
 ```
 tsumiki/
-├── .claude-plugin/         # Claude Code Plugin設定
-├── commands/               # コマンドテンプレート（.md, .sh）
-├── agents/                 # エージェント定義（.md）
-├── book/                   # ドキュメント
+├── .claude-plugin/         # Claude Code Plugin 配置
+├── commands/               # 命令模板(.md, .sh)
+├── agents/                 # 代理定义(.md)
+├── book/                   # 文档
 ├── package.json
-├── CLAUDE.md              # プロジェクト指示書
+├── CLAUDE.md              # 项目说明书
 └── README.md
 ```
 
-## プルリクエスト
+## Pull Request
 
-### プルリクエストの作成
+### 创建 Pull Request
 
-1. 変更をプッシュします：
+1. 推送更改:
 
 ```bash
 git push origin feature/your-feature-name
 ```
 
-2. GitHubでプルリクエストを作成します
+2. 在 GitHub 上创建 Pull Request
 
-3. プルリクエストテンプレートに従って説明を記載します
+3. 按照 Pull Request 模板填写说明
 
-### プルリクエストの要件
+### Pull Request 要求
 
-- [ ] 変更内容が明確に説明されている
-- [ ] 関連するIssueがリンクされている（該当する場合）
-- [ ] コード品質チェックが通っている
-- [ ] 機密情報が含まれていない
+- [ ] 更改内容有明确说明
+- [ ] 已链接相关 Issue(如适用)
+- [ ] 代码质量检查已通过
+- [ ] 不包含敏感信息
 
-## Issue報告
+## Issue 报告
 
-バグ報告や機能要望は[Issues](https://github.com/classmethod/tsumiki/issues)で受け付けています。
+我们在 [Issues](https://github.com/classmethod/tsumiki/issues) 接受 Bug 报告和功能建议。
 
-### バグ報告
+### Bug 报告
 
-以下の情報を含めてください：
+请包含以下信息:
 
-- 再現手順
-- 期待される動作
-- 実際の動作
-- 環境情報（OS、Node.jsバージョンなど）
-- エラーメッセージ（該当する場合）
+- 重现步骤
+- 预期行为
+- 实际行为
+- 环境信息(OS、Node.js 版本等)
+- 错误消息(如适用)
 
-### 機能要望
+### 功能建议
 
-以下の情報を含めてください：
+请包含以下信息:
 
-- 提案する機能の説明
-- ユースケース
-- 期待される利益
-- 実装案（あれば）
+- 建议功能的说明
+- 使用场景
+- 预期收益
+- 实现方案(如有)
 
-## セキュリティ
+## 安全性
 
-セキュリティに関する問題を発見した場合は、公開のIssueではなく、プライベートに報告してください。
+如果发现安全相关问题,请私下报告,不要在公开 Issue 中发布。
 
-## ライセンス
+## 许可证
 
-このプロジェクトはMITライセンスの下で公開されています。コントリビューションする際は、このライセンスに同意したものとみなされます。
+本项目在 MIT 许可证下发布。贡献时将被视为同意此许可证。
 
-## 質問・サポート
+## 问题与支持
 
-- [Issues](https://github.com/classmethod/tsumiki/issues) - バグ報告、機能要望
-- [Discussions](https://github.com/classmethod/tsumiki/discussions) - 質問、議論
+- [Issues](https://github.com/classmethod/tsumiki/issues) - Bug 报告、功能建议
+- [Discussions](https://github.com/classmethod/tsumiki/discussions) - 问题、讨论
 
-コントリビューションをお待ちしています！
+期待您的贡献!
