@@ -1,27 +1,28 @@
 {
-  "name": "tsumiki",
+  "name": "tsumiki-cn",
   "private": false,
   "version": "0.0.7",
   "description": "AI-driven development framework for Claude Code",
   "keywords": [
     "tsumiki",
+    "tsumiki-cn",
     "claude",
     "claudecode",
     "ai",
     "tdd",
     "plugin"
   ],
-  "homepage": "https://github.com/classmethod/tsumiki#readme",
+  "homepage": "https://github.com/tetrisKun/tsumiki-cn#readme",
   "bugs": {
-    "url": "https://github.com/classmethod/tsumiki/issues"
+    "url": "https://github.com/tetrisKun/tsumiki-cn/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/classmethod/tsumiki.git"
+    "url": "https://github.com/tetrisKun/tsumiki-cn.git"
   },
   "license": "MIT",
   "author": {
-    "name": "classmethod"
+    "name": "tetrisKun"
   },
   "scripts": {
     "prepare": "simple-git-hooks",
