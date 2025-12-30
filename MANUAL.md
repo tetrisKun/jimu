@@ -11,7 +11,7 @@
 /plugin install tsumiki@tsumiki
 ```
 
-**注意**: 命令使用 `/tsumiki:` 前缀执行(例: `/tsumiki:kairo-requirements`)。
+**注意**: 命令使用 `/jimu:` 前缀执行(例: `/jimu:kairo-requirements`)。
 
 #### 项目特定规则设置
 
@@ -38,22 +38,22 @@ docs/rule/kairo/requirements/ # kairo-requirements 专用规则
 
 ```
 # TDD 需求定义
-/tsumiki:tdd-requirements 任务文件名　TASK编号
+/jimu:tdd-requirements 任务文件名　TASK编号
 
 # 创建测试用例
-/tsumiki:tdd-testcases 任务文件名　TASK编号
+/jimu:tdd-testcases 任务文件名　TASK编号
 
 # 测试实现(Red)
-/tsumiki:tdd-red 任务文件名　TASK编号
+/jimu:tdd-red 任务文件名　TASK编号
 
 # 最小实现(Green)
-/tsumiki:tdd-green 任务文件名　TASK编号
+/jimu:tdd-green 任务文件名　TASK编号
 
 # 重构
-/tsumiki:tdd-refactor 任务文件名　TASK编号
+/jimu:tdd-refactor 任务文件名　TASK编号
 
 # TDD 完成确认
-/tsumiki:tdd-verify-complete 任务文件名　TASK编号
+/jimu:tdd-verify-complete 任务文件名　TASK编号
 ```
 
 ### DIRECT 命令
@@ -62,10 +62,10 @@ docs/rule/kairo/requirements/ # kairo-requirements 专用规则
 
 ```
 # DIRECT 准备
-/tsumiki:direct-setup 任务文件名　TASK编号
+/jimu:direct-setup 任务文件名　TASK编号
 
 # DIRECT 验证
-/tsumiki:direct-verify 任务文件名　TASK编号
+/jimu:direct-verify 任务文件名　TASK编号
 ```
 
 ### Kairo 命令(综合流程)
@@ -75,7 +75,7 @@ docs/rule/kairo/requirements/ # kairo-requirements 专用规则
 初始化项目的技术栈(框架、库):
 
 ```
-/tsumiki:init-tech-stack
+/jimu:init-tech-stack
 ```
 
 init-tech-stack 生成以下内容:
@@ -87,7 +87,7 @@ init-tech-stack 生成以下内容:
 首先,向 Kairo 传达项目的需求概要:
 
 ```
-/tsumiki:kairo-requirements 需求概要
+/jimu:kairo-requirements 需求概要
 
 # 提示示例:
 # "想实现电商网站的商品评价功能。
@@ -108,7 +108,7 @@ Kairo 生成以下内容:
 确认·修改需求后,请求设计:
 
 ```
-/tsumiki:kairo-design(或可省略)
+/jimu:kairo-design(或可省略)
 
 # 请告知已批准需求
 ```
@@ -127,12 +127,12 @@ Kairo 生成以下内容:
 确认设计后(可省略批准),执行任务分割:
 
 ```
-/tsumiki:kairo-tasks
+/jimu:kairo-tasks
 
 # 请告知已批准设计(或可省略)
 ```
 
-建议执行 `/tsumiki:kairo-task-verify` 来确认任务内容。
+建议执行 `/jimu:kairo-task-verify` 来确认任务内容。
 
 Kairo 生成以下内容:
 - 考虑依赖关系的任务列表
@@ -148,10 +148,10 @@ Kairo 生成以下内容:
 
 ```
 # 按顺序实现所有任务
-/tsumiki:kairo-implement
+/jimu:kairo-implement
 
 # 只实现特定任务
-/tsumiki:kairo-implement  任务文件名　TASK编号
+/jimu:kairo-implement  任务文件名　TASK编号
 # "请实现TASK-101"
 ```
 
@@ -169,16 +169,16 @@ Kairo 对每个任务内部使用 TDD 命令执行以下流程:
 
 ```
 # 从现有代码分析任务结构
-/tsumiki:rev-tasks
+/jimu:rev-tasks
 
 # 逆向生成设计文档(建议在任务分析后执行)
-/tsumiki:rev-design
+/jimu:rev-design
 
 # 逆向生成测试规范(建议在设计文档后执行)
-/tsumiki:rev-specs
+/jimu:rev-specs
 
 # 逆向生成需求定义书(建议在完成所有分析后执行)
-/tsumiki:rev-requirements
+/jimu:rev-requirements
 ```
 
 #### 逆向工程详情
@@ -262,16 +262,16 @@ Kairo 对每个任务内部使用 TDD 命令执行以下流程:
 
 ```bash
 # 逆向分析整个项目
-/tsumiki:rev-tasks
+/jimu:rev-tasks
 # → 掌握任务结构
 
-/tsumiki:rev-design
+/jimu:rev-design
 # → 文档化架构和设计
 
-/tsumiki:rev-specs
+/jimu:rev-specs
 # → 分析测试状况识别不足的测试
 
-/tsumiki:rev-requirements
+/jimu:rev-requirements
 # → 最后生成需求定义书
 ```
 

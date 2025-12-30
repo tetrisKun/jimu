@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 概要
 
-Tsumiki 是一个 AI 驱动的开发框架。通过 Claude Code Plugin 安装,提供从需求定义到实现的 AI 辅助开发流程。
+Jimu 是基于 Tsumiki 中文化的一个 AI 驱动的开发框架。通过 Claude Code Plugin 安装,提供从需求定义到实现的 AI 辅助开发流程。
 
 此仓库包含以下内容:
 - **`commands/`**: Claude Code 斜杠命令的模板文件(`.md` 和 `.sh`)
@@ -39,17 +39,17 @@ pnpm prepare                # 设置 simple-git-hooks
 
 ## 安装方法
 
-用户可以使用以下命令安装 Tsumiki:
+用户可以使用以下命令安装 Jimu:
 
 ```bash
-/plugin marketplace add https://github.com/classmethod/tsumiki.git
-/plugin install tsumiki@tsumiki
+/plugin marketplace add https://github.com/tetrisKun/jimu.git
+/plugin install jimu@jimu
 ```
 
 Claude Code Plugin 会自动:
 1. 从仓库加载 `commands/` 和 `agents/` 的文件
 2. 根据 `.claude-plugin/plugin.json` 的配置注册命令和代理
-3. 使命令可以使用 `/tsumiki:` 前缀
+3. 使命令可以使用 `/jimu:` 前缀
 
 ## 质量管理
 

@@ -7,19 +7,19 @@ DCS 是一个命令套件,用于支持软件开发各个阶段的各种分析和
 ### 按开发阶段分类的命令列表
 
 #### **企划·需求定义阶段**
-- `/tsumiki:dcs:feature-rubber-duck` - 整理想法并创建 PRD
+- `/jimu:dcs:feature-rubber-duck` - 整理想法并创建 PRD
 
 #### **设计·分析阶段**
-- `/tsumiki:dcs:sequence-diagram-analysis` - 创建序列图
-- `/tsumiki:dcs:state-transition-analysis` - 状态转换分析
-- `/tsumiki:dcs:impact-analysis` - 影响范围分析
+- `/jimu:dcs:sequence-diagram-analysis` - 创建序列图
+- `/jimu:dcs:state-transition-analysis` - 状态转换分析
+- `/jimu:dcs:impact-analysis` - 影响范围分析
 
 #### **实现计划阶段**
-- `/tsumiki:dcs:incremental-dev` - 增量开发计划
+- `/jimu:dcs:incremental-dev` - 增量开发计划
 
 #### **调试·维护阶段**
-- `/tsumiki:dcs:bug-analysis` - Bug 原因分析
-- `/tsumiki:dcs:performance-analysis` - 性能问题调查
+- `/jimu:dcs:bug-analysis` - Bug 原因分析
+- `/jimu:dcs:performance-analysis` - 性能问题调查
 
 ---
 
@@ -309,22 +309,22 @@ DCS 是一个命令套件,用于支持软件开发各个阶段的各种分析和
 
 ### 执行 Bug 分析
 ```
-/tsumiki:dcs:bug-analysis 购物车内的商品总金额计算不正确
+/jimu:dcs:bug-analysis 购物车内的商品总金额计算不正确
 ```
 
 ### 执行影响范围分析
 ```
-/tsumiki:dcs:impact-analysis src/models/User.ts
+/jimu:dcs:impact-analysis src/models/User.ts
 ```
 
 ### 执行序列图创建
 ```
-/tsumiki:dcs:sequence-diagram-analysis 订单确认处理
+/jimu:dcs:sequence-diagram-analysis 订单确认处理
 ```
 
 ### 执行增量开发计划
 ```
-/tsumiki:dcs:incremental-dev 添加用户认证功能
+/jimu:dcs:incremental-dev 添加用户认证功能
 ```
 
 ---
