@@ -1,33 +1,33 @@
-# 3.4 Red-Green-Refactor-Validationサイクル
+# 3.4 Red-Green-Refactor-Validation循环
 
-## 拡張TDDサイクルの概要
+## 扩展TDD循环概述
 
-AITDDの核心は、従来のTDD（Red-Green-Refactor）に**Validation**ステップを追加した拡張サイクルです。このサイクルは主にAIが実行しますが、人間の監督下で行われ、高品質なコードを効率的に生成します。
+AITDD的核心是在传统TDD(Red-Green-Refactor)基础上增加**Validation**步骤的扩展循环。这个循环主要由AI执行,但在人工监督下进行,能够高效生成高质量的代码。
 
 ```mermaid
 graph LR
     A[Red] --> B[Green]
     B --> C[Refactor]
     C --> D[Validation]
-    D --> E{完了判定}
-    E -->|継続| A
-    E -->|完了| F[次の機能]
+    D --> E{完成判定}
+    E -->|继续| A
+    E -->|完成| F[下一个功能]
 ```
 
-## Red-Green-Refactor-Validationサイクル詳細
+## Red-Green-Refactor-Validation循环详解
 
-### Red フェーズ：テスト失敗の確認
+### Red阶段:确认测试失败
 
 #### 目的
-- テストケースを実装する
-- テストが期待通りに失敗することを確認する
-- テスト自体の正当性を検証する
+- 实现测试用例
+- 确认测试按预期失败
+- 验证测试本身的正确性
 
-#### 具体的な作業内容
+#### 具体工作内容
 
-##### 1. テストケースの実装
+##### 1. 测试用例的实现
 ```javascript
-// 例：ユーザー登録機能のテスト実装
+// 例:用户注册功能的测试实现
 describe('User Registration', () => {
   test('should create user with valid data', async () => {
     const userData = {
@@ -35,34 +35,34 @@ describe('User Registration', () => {
       password: 'SecurePass123!',
       password_confirmation: 'SecurePass123!'
     };
-    
+
     const response = await request(app)
       .post('/api/users')
       .send(userData);
-    
+
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty('id');
     expect(response.body.email).toBe(userData.email);
-    
-    // データベース確認
+
+    // 数据库确认
     const user = await User.findByEmail(userData.email);
     expect(user).toBeTruthy();
     expect(user.password_hash).not.toBe(userData.password);
   });
-  
+
   test('should reject duplicate email', async () => {
-    // 既存ユーザーを事前作成
+    // 事先创建已存在用户
     await createUser({ email: 'existing@example.com' });
-    
+
     const duplicateData = {
       email: 'existing@example.com',
       password: 'NewPass456!'
     };
-    
+
     const response = await request(app)
       .post('/api/users')
       .send(duplicateData);
-    
+
     expect(response.status).toBe(400);
     expect(response.body.error).toBe('validation_failed');
     expect(response.body.details[0].field).toBe('email');
@@ -70,54 +70,54 @@ describe('User Registration', () => {
 });
 ```
 
-##### 2. テスト実行と失敗確認
+##### 2. 测试执行和失败确认
 ```bash
 $ npm test
 ❌ User Registration › should create user with valid data
    Error: Cannot POST /api/users
-   
+
 ❌ User Registration › should reject duplicate email
    Error: Cannot POST /api/users
 ```
 
-##### 3. 失敗理由の確認
-- エンドポイントが未実装
-- 必要な依存関係が不足
-- テスト環境の設定不備
+##### 3. 失败原因确认
+- 端点未实现
+- 缺少必要的依赖关系
+- 测试环境配置不足
 
-#### AIによるRedフェーズの実行
+#### AI执行Red阶段
 
-##### プロンプト例
+##### 提示词示例
 ```markdown
-## 指示：Redフェーズの実行
+## 指示:执行Red阶段
 
 ### 背景
-- 機能：ユーザー登録API
-- テストケース仕様：testcases.md参照
-- 既存コード：src/配下を確認
+- 功能:用户注册API
+- 测试用例规格:参考testcases.md
+- 现有代码:确认src/目录下
 
-### 実行内容
-1. testcases.mdの各テストケースをJestテストとして実装
-2. テストを実行し、期待通りに失敗することを確認
-3. 失敗理由を整理して報告
+### 执行内容
+1. 将testcases.md的各测试用例实现为Jest测试
+2. 执行测试,确认按预期失败
+3. 整理失败原因并报告
 
-### 出力形式
-- テストコード（完全版）
-- テスト実行結果
-- 失敗理由の分析
-- 次のGreenフェーズへの提案
+### 输出格式
+- 测试代码(完整版)
+- 测试执行结果
+- 失败原因分析
+- 对下一个Green阶段的建议
 ```
 
-### Green フェーズ：最小実装
+### Green阶段:最小实现
 
 #### 目的
-- テストを通す最小限の実装を行う
-- 過度な実装を避け、テスト駆動を維持する
-- 次のRefactorフェーズでの改善余地を残す
+- 进行使测试通过的最小实现
+- 避免过度实现,维持测试驱动
+- 为下一个Refactor阶段留出改进空间
 
-#### 具体的な作業内容
+#### 具体工作内容
 
-##### 1. 最小限のAPI実装
+##### 1. 最小API实现
 ```javascript
 // routes/users.js
 const express = require('express');
@@ -128,23 +128,23 @@ const router = express.Router();
 router.post('/users', async (req, res) => {
   try {
     const { email, password, password_confirmation } = req.body;
-    
-    // 基本バリデーション
+
+    // 基本验证
     if (!email || !password || !password_confirmation) {
       return res.status(400).json({
         error: 'validation_failed',
         details: [{ field: 'required', message: 'Missing required fields' }]
       });
     }
-    
+
     if (password !== password_confirmation) {
       return res.status(400).json({
         error: 'validation_failed',
         details: [{ field: 'password', message: 'Password confirmation does not match' }]
       });
     }
-    
-    // 重複チェック
+
+    // 重复检查
     const existingUser = await User.findByEmail(email);
     if (existingUser) {
       return res.status(400).json({
@@ -152,22 +152,22 @@ router.post('/users', async (req, res) => {
         details: [{ field: 'email', message: 'Email already exists' }]
       });
     }
-    
-    // パスワードハッシュ化
+
+    // 密码哈希化
     const password_hash = await bcrypt.hash(password, 10);
-    
-    // ユーザー作成
+
+    // 用户创建
     const user = await User.create({
       email,
       password_hash
     });
-    
+
     res.status(201).json({
       id: user.id,
       email: user.email,
       created_at: user.created_at
     });
-    
+
   } catch (error) {
     console.error('User creation error:', error);
     res.status(500).json({ error: 'Internal server error' });
@@ -177,7 +177,7 @@ router.post('/users', async (req, res) => {
 module.exports = router;
 ```
 
-##### 2. 必要最小限のモデル実装
+##### 2. 必要最小限度的模型实现
 ```javascript
 // models/User.js
 const db = require('../database');
@@ -190,13 +190,13 @@ class User {
     );
     return result[0] || null;
   }
-  
+
   static async create({ email, password_hash }) {
     const result = await db.query(
       'INSERT INTO users (email, password_hash, created_at) VALUES (?, ?, NOW())',
       [email, password_hash]
     );
-    
+
     return {
       id: result.insertId,
       email,
@@ -208,7 +208,7 @@ class User {
 module.exports = User;
 ```
 
-##### 3. テスト実行と成功確認
+##### 3. 测试执行和成功确认
 ```bash
 $ npm test
 ✅ User Registration › should create user with valid data
@@ -217,109 +217,109 @@ $ npm test
 Tests: 2 passed, 2 total
 ```
 
-#### AIによるGreenフェーズの実行
+#### AI执行Green阶段
 
-##### プロンプト例
+##### 提示词示例
 ```markdown
-## 指示：Greenフェーズの実行
+## 指示:执行Green阶段
 
 ### 背景
-- 失敗中のテスト：[Redフェーズの結果]
-- 要件：requirements.md参照
-- 既存コード構造：src/配下確認
+- 失败中的测试:[Red阶段的结果]
+- 要求:参考requirements.md
+- 现有代码结构:确认src/目录下
 
-### 実行内容
-1. 失敗テストを通す最小限の実装
-2. 要件の過度な実装は避ける
-3. テスト実行で全ケース成功を確認
+### 执行内容
+1. 使失败测试通过的最小实现
+2. 避免过度实现要求
+3. 通过测试执行确认所有用例成功
 
-### 制約
-- 最小実装原則を遵守
-- テストケース以外の機能は実装しない
-- 既存コードとの整合性を維持
+### 约束
+- 遵守最小实现原则
+- 不实现测试用例以外的功能
+- 维持与现有代码的一致性
 
-### 出力形式
-- 実装コード（完全版）
-- テスト実行結果
-- 実装方針の説明
+### 输出格式
+- 实现代码(完整版)
+- 测试执行结果
+- 实现方针的说明
 ```
 
-### Refactor フェーズ：コード改善
+### Refactor阶段:代码改进
 
 #### 目的
-- コードの品質を向上させる
-- 保守性と可読性を改善する
-- パフォーマンスを最適化する
-- テストは継続して成功させる
+- 提高代码质量
+- 改善可维护性和可读性
+- 优化性能
+- 测试继续保持成功
 
-#### 具体的な作業内容
+#### 具体工作内容
 
-##### 1. コード構造の改善
+##### 1. 代码结构改进
 ```javascript
-// services/UserService.js - ビジネスロジックの分離
+// services/UserService.js - 业务逻辑分离
 class UserService {
   constructor(userRepository, passwordHasher) {
     this.userRepository = userRepository;
     this.passwordHasher = passwordHasher;
   }
-  
+
   async createUser({ email, password, password_confirmation }) {
-    // バリデーション
+    // 验证
     this.validateUserInput({ email, password, password_confirmation });
-    
-    // 重複チェック
+
+    // 重复检查
     await this.checkEmailUniqueness(email);
-    
-    // ユーザー作成
+
+    // 用户创建
     const password_hash = await this.passwordHasher.hash(password);
     return await this.userRepository.create({ email, password_hash });
   }
-  
+
   validateUserInput({ email, password, password_confirmation }) {
     const errors = [];
-    
+
     if (!this.isValidEmail(email)) {
       errors.push({ field: 'email', message: 'Invalid email format' });
     }
-    
+
     if (!this.isValidPassword(password)) {
       errors.push({ field: 'password', message: 'Password does not meet requirements' });
     }
-    
+
     if (password !== password_confirmation) {
       errors.push({ field: 'password_confirmation', message: 'Password confirmation does not match' });
     }
-    
+
     if (errors.length > 0) {
       throw new ValidationError(errors);
     }
   }
-  
+
   async checkEmailUniqueness(email) {
     const existingUser = await this.userRepository.findByEmail(email);
     if (existingUser) {
       throw new ValidationError([{ field: 'email', message: 'Email already exists' }]);
     }
   }
-  
+
   isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return email && email.length <= 254 && emailRegex.test(email);
   }
-  
+
   isValidPassword(password) {
     if (!password || password.length < 8) return false;
-    
+
     const hasUpperCase = /[A-Z]/.test(password);
     const hasLowerCase = /[a-z]/.test(password);
     const hasNumbers = /\d/.test(password);
     const hasSymbols = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
-    
+
     return hasUpperCase && hasLowerCase && hasNumbers && hasSymbols;
   }
 }
 
-// コントローラーの簡素化
+// 控制器简化
 router.post('/users', async (req, res) => {
   try {
     const user = await userService.createUser(req.body);
@@ -335,14 +335,14 @@ router.post('/users', async (req, res) => {
         details: error.details
       });
     }
-    
+
     console.error('User creation error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 ```
 
-##### 2. エラーハンドリングの改善
+##### 2. 错误处理改进
 ```javascript
 // errors/ValidationError.js
 class ValidationError extends Error {
@@ -361,13 +361,13 @@ const errorHandler = (error, req, res, next) => {
       details: error.details
     });
   }
-  
+
   console.error('Unhandled error:', error);
   res.status(500).json({ error: 'Internal server error' });
 };
 ```
 
-##### 3. テスト実行で品質維持確認
+##### 3. 通过测试执行确认质量维持
 ```bash
 $ npm test
 ✅ User Registration › should create user with valid data
@@ -378,65 +378,65 @@ $ npm test
 Tests: 4 passed, 4 total
 ```
 
-#### AIによるRefactorフェーズの実行
+#### AI执行Refactor阶段
 
-##### プロンプト例
+##### 提示词示例
 ```markdown
-## 指示：Refactorフェーズの実行
+## 指示:执行Refactor阶段
 
 ### 背景
-- 現在のコード：[Greenフェーズの成果物]
-- テスト状況：全テスト成功
-- 品質目標：保守性・可読性・パフォーマンス向上
+- 当前代码:[Green阶段的成果物]
+- 测试状况:所有测试成功
+- 质量目标:提高可维护性·可读性·性能
 
-### 実行内容
-1. コード構造の改善（責任分離、DRY原則）
-2. エラーハンドリングの統一
-3. パフォーマンス最適化
-4. コーディング規約の適用
-5. テスト実行で品質維持確認
+### 执行内容
+1. 代码结构改进(职责分离,DRY原则)
+2. 错误处理统一
+3. 性能优化
+4. 应用编码规范
+5. 通过测试执行确认质量维持
 
-### 制約
-- 既存テストを破綻させない
-- 過度なアーキテクチャ変更は避ける
-- 段階的改善を重視
+### 约束
+- 不破坏现有测试
+- 避免过度的架构变更
+- 重视阶段性改进
 
-### 出力形式
-- リファクタリング後のコード
-- 改善点の説明
-- テスト実行結果
+### 输出格式
+- 重构后的代码
+- 改进点说明
+- 测试执行结果
 ```
 
-### Validation フェーズ：包括的検証
+### Validation阶段:全面验证
 
 #### 目的
-- 実装の妥当性を総合的に検証する
-- 品質基準への適合を確認する
-- 追加のテストケースの必要性を評価する
-- 完了判定を行う
+- 综合验证实现的合理性
+- 确认符合质量标准
+- 评估额外测试用例的必要性
+- 进行完成判定
 
-#### 具体的な検証項目
+#### 具体验证项目
 
-##### 1. 実装済みテストケースの確認
+##### 1. 已实现测试用例的确认
 ```markdown
-## テストケース実装状況確認
+## 测试用例实现状况确认
 
-### 予定テストケース（testcases.mdより）
-- [x] TC001: 正常なユーザー登録
-- [x] TC002: メールアドレス重複エラー
-- [x] TC003: パスワード不一致エラー
-- [x] TC004: 無効なメールアドレス形式
-- [x] TC005: パスワード強度不足
-- [x] TC006: 必須項目未入力
-- [x] TC007: 境界値テスト - メールアドレス長
-- [ ] TC008: レート制限テスト（未実装）
-- [ ] TC009: データベース接続エラー（未実装）
-- [x] TC010: CSRFトークン検証
+### 预定测试用例(来自testcases.md)
+- [x] TC001: 正常的用户注册
+- [x] TC002: 邮箱地址重复错误
+- [x] TC003: 密码不一致错误
+- [x] TC004: 无效的邮箱地址格式
+- [x] TC005: 密码强度不足
+- [x] TC006: 必填项未输入
+- [x] TC007: 边界值测试 - 邮箱地址长度
+- [ ] TC008: 速率限制测试(未实现)
+- [ ] TC009: 数据库连接错误(未实现)
+- [x] TC010: CSRF令牌验证
 
-### 実装率：80% (8/10)
+### 实现率:80% (8/10)
 ```
 
-##### 2. 既存テストの回帰確認
+##### 2. 现有测试的回归确认
 ```bash
 $ npm test
 ✅ User Authentication › should login with valid credentials
@@ -450,7 +450,7 @@ Tests: 6 passed, 6 total
 Time: 2.341s
 ```
 
-##### 3. コード品質メトリクス確認
+##### 3. 代码质量指标确认
 ```bash
 $ npm run quality-check
 ✅ ESLint: 0 errors, 0 warnings
@@ -459,198 +459,198 @@ $ npm run quality-check
 ✅ Dependency Check: No vulnerabilities found
 ```
 
-##### 4. 仕様適合性確認
+##### 4. 规格符合性确认
 ```markdown
-## 仕様適合性チェック
+## 规格符合性检查
 
-### 機能要件
-- [x] email/password による新規ユーザー登録
-- [x] 重複email の検証
-- [x] パスワード強度チェック
-- [x] パスワードハッシュ化（bcrypt）
+### 功能需求
+- [x] 通过email/password进行新用户注册
+- [x] 验证重复email
+- [x] 密码强度检查
+- [x] 密码哈希化(bcrypt)
 
-### 非機能要件
-- [x] レスポンス時間: 平均 1.2秒（2秒以内）
-- [ ] 同時登録: 負荷テスト未実施
-- [x] パスワードハッシュ化必須
+### 非功能需求
+- [x] 响应时间:平均1.2秒(2秒以内)
+- [ ] 同时注册:负载测试未实施
+- [x] 密码哈希化必须
 
-### API仕様
-- [x] POST /api/users エンドポイント
-- [x] 期待されるリクエスト/レスポンス形式
-- [x] 適切なHTTPステータスコード
+### API规格
+- [x] POST /api/users 端点
+- [x] 预期的请求/响应格式
+- [x] 适当的HTTP状态码
 
-### データベース設計
-- [x] usersテーブル設計
-- [x] 適切なインデックス
-- [x] 制約の実装
+### 数据库设计
+- [x] users表设计
+- [x] 适当的索引
+- [x] 约束的实现
 ```
 
-##### 5. セキュリティ要件確認
+##### 5. 安全要求确认
 ```markdown
-## セキュリティチェック
+## 安全检查
 
-### パスワード管理
-- [x] パスワード平文保存なし
-- [x] bcryptによるハッシュ化
-- [x] 適切なソルト使用
+### 密码管理
+- [x] 无密码明文保存
+- [x] bcrypt哈希化
+- [x] 使用适当的盐值
 
-### 入力検証
-- [x] SQLインジェクション対策
-- [x] XSS対策
-- [x] CSRFトークン検証
+### 输入验证
+- [x] SQL注入对策
+- [x] XSS对策
+- [x] CSRF令牌验证
 
-### アクセス制御
-- [x] 適切なHTTPステータスコード
-- [x] エラー情報の適切な制限
+### 访问控制
+- [x] 适当的HTTP状态码
+- [x] 适当限制错误信息
 ```
 
-#### AIによるValidationフェーズの実行
+#### AI执行Validation阶段
 
-##### プロンプト例
+##### 提示词示例
 ```markdown
-## 指示：Validationフェーズの実行
+## 指示:执行Validation阶段
 
 ### 背景
-- 実装完了コード：[Refactorフェーズの成果物]
-- 要件定義：requirements.md
-- テストケース：testcases.md
-- 既存システム：全体コードベース
+- 实现完成代码:[Refactor阶段的成果物]
+- 需求定义:requirements.md
+- 测试用例:testcases.md
+- 现有系统:整体代码库
 
-### 検証項目
-1. testcases.md記載の全テストケース実装状況確認
-2. 既存テストの回帰テスト実行
-3. requirements.md要件の充足確認
-4. コード品質メトリクス測定
-5. セキュリティ要件確認
+### 验证项目
+1. 确认testcases.md记载的所有测试用例实现状况
+2. 执行现有测试的回归测试
+3. 确认requirements.md要求的满足情况
+4. 测量代码质量指标
+5. 确认安全要求
 
-### 完了判定基準
-- 計画テストケースの90%以上実装
-- 既存テスト全て成功
-- 重要要件100%充足
-- 重大なセキュリティ問題なし
+### 完成判定标准
+- 实现90%以上的计划测试用例
+- 所有现有测试成功
+- 100%满足重要要求
+- 无重大安全问题
 
-### 出力形式
-- 検証結果レポート
-- 未実装テストケース一覧
-- 品質メトリクス
-- 完了/継続の判定理由
+### 输出格式
+- 验证结果报告
+- 未实现测试用例列表
+- 质量指标
+- 完成/继续判定的理由
 ```
 
-#### Validationフェーズの判定基準
+#### Validation阶段的判定标准
 
-##### ✅ 完了判定（自動で次ステップ進行）
+##### ✅ 完成判定(自动进入下一步)
 ```markdown
-### 完了条件
-- 既存テスト状態: すべて成功
-- テストケース実装率: 90%以上
-- 重要要件充足率: 100%
-- コードカバレッジ: 80%以上
-- セキュリティチェック: 重大な問題なし
+### 完成条件
+- 现有测试状态:全部成功
+- 测试用例实现率:90%以上
+- 重要要求满足率:100%
+- 代码覆盖率:80%以上
+- 安全检查:无重大问题
 ```
 
-##### ⚠️ 継続判定（追加実装必要）
+##### ⚠️ 继续判定(需要额外实现)
 ```markdown
-### 継続条件
-- 既存テスト: 失敗あり
-- テストケース実装率: 90%未満
-- 重要要件: 未充足項目あり
-- 品質メトリクス: 基準値未達
-- セキュリティ: 重大な問題発見
+### 继续条件
+- 现有测试:有失败
+- 测试用例实现率:低于90%
+- 重要要求:有未满足项目
+- 质量指标:未达到基准值
+- 安全:发现重大问题
 ```
 
-## サイクル全体の管理
+## 循环整体管理
 
-### プロセス制御
+### 流程控制
 
-#### 1. サイクル実行の自動化
+#### 1. 循环执行的自动化
 ```markdown
-## AITDD実行スクリプト例
+## AITDD执行脚本示例
 
-### 入力
+### 输入
 - requirements.md
 - testcases.md
-- 既存コードベース
+- 现有代码库
 
-### 実行フロー
-1. Red: テストケース実装・実行
-2. Green: 最小実装
-3. Refactor: コード改善
-4. Validation: 包括的検証
-5. 判定: 完了/継続の自動判定
+### 执行流程
+1. Red: 测试用例实现·执行
+2. Green: 最小实现
+3. Refactor: 代码改进
+4. Validation: 全面验证
+5. 判定: 完成/继续的自动判定
 
-### 出力
-- 実装コード
-- テスト結果
-- 品質レポート
-- 次ステップの推奨事項
+### 输出
+- 实现代码
+- 测试结果
+- 质量报告
+- 下一步的推荐事项
 ```
 
-#### 2. 進捗の可視化
+#### 2. 进度可视化
 ```markdown
-## 進捗トラッキング
+## 进度跟踪
 
-### テストケース進捗
-- 実装済み: 8/10 (80%)
-- 成功: 8/8 (100%)
-- 失敗: 0/8 (0%)
+### 测试用例进度
+- 已实现:8/10 (80%)
+- 成功:8/8 (100%)
+- 失败:0/8 (0%)
 
-### 品質メトリクス
-- カバレッジ: 95%
-- 複雑度: 3.2 (良好)
-- 重複度: 2% (良好)
+### 质量指标
+- 覆盖率:95%
+- 复杂度:3.2 (良好)
+- 重复度:2% (良好)
 
-### 要件充足度
-- 機能要件: 100%
-- 非機能要件: 80%
-- セキュリティ要件: 100%
+### 要求满足度
+- 功能要求:100%
+- 非功能要求:80%
+- 安全要求:100%
 ```
 
-### 人間の介入ポイント
+### 人工介入点
 
-#### 1. 重要な判断が必要な場合
-- アーキテクチャの大幅変更
-- セキュリティ要件の解釈
-- パフォーマンス要件の調整
-- ビジネスロジックの複雑な判断
+#### 1. 需要重要判断的情况
+- 架构的重大变更
+- 安全要求的解释
+- 性能要求的调整
+- 业务逻辑的复杂判断
 
-#### 2. 品質基準の調整
-- テストカバレッジの目標値
-- コード複雑度の許容値
-- パフォーマンス要件の見直し
+#### 2. 质量标准的调整
+- 测试覆盖率的目标值
+- 代码复杂度的允许值
+- 性能要求的重新审视
 
-#### 3. プロセスの最適化
-- サイクル実行時間の改善
-- AI指示の精度向上
-- 自動化範囲の拡大
+#### 3. 流程优化
+- 循环执行时间的改进
+- AI指示的精度提升
+- 自动化范围的扩大
 
-## エラー対応とデバッグ
+## 错误处理和调试
 
-### よくある問題とその対処法
+### 常见问题及其对处方法
 
-#### 1. Redフェーズでテストが正しく失敗しない
-**原因**: テストケースの実装ミス、環境設定問題
-**対処**: テストケース仕様の再確認、環境の初期化
+#### 1. Red阶段测试未正确失败
+**原因**:测试用例实现错误,环境配置问题
+**对处**:重新确认测试用例规格,初始化环境
 
-#### 2. Greenフェーズで過度な実装
-**原因**: 最小実装原則の理解不足
-**対処**: テスト駆動の徹底、実装範囲の明確化
+#### 2. Green阶段过度实现
+**原因**:对最小实现原则理解不足
+**对处**:彻底测试驱动,明确实现范围
 
-#### 3. Refactorフェーズでテストが破綻
-**原因**: リファクタリング中の論理変更
-**対処**: 段階的リファクタリング、継続的テスト実行
+#### 3. Refactor阶段测试破坏
+**原因**:重构中的逻辑变更
+**对处**:阶段性重构,持续测试执行
 
-#### 4. Validationフェーズで基準未達
-**原因**: 要件理解の不足、品質基準の設定ミス
-**対処**: 要件の再確認、基準値の調整
+#### 4. Validation阶段未达标准
+**原因**:要求理解不足,质量标准设定错误
+**对处**:重新确认要求,调整基准值
 
-## 次のステップ
+## 下一步
 
-Red-Green-Refactor-Validationサイクルの理解ができたら、次は[Validationステップの詳細](./05-validation-details.md)でより深い品質管理手法を学びます。
+理解了Red-Green-Refactor-Validation循环后,下一步通过[Validation步骤详解](./05-validation-details.md)学习更深入的质量管理方法。
 
-### 学習のポイント
-- [ ] 各フェーズの目的と実行内容を理解した
-- [ ] AIと人間の役割分担を把握した
-- [ ] サイクル全体の品質管理手法を習得した
-- [ ] エラー対応の基本パターンを学んだ
+### 学习要点
+- [ ] 理解了各阶段的目的和执行内容
+- [ ] 掌握了AI和人类的角色分工
+- [ ] 掌握了循环整体的质量管理方法
+- [ ] 学习了错误处理的基本模式
 
-このサイクルをマスターすることで、AIの力を最大限活用しながら高品質なソフトウェアを効率的に開発できるようになります。
+掌握这个循环,就能在最大限度活用AI能力的同时,高效开发高质量的软件。
