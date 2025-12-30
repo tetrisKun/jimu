@@ -40,7 +40,7 @@ argument-hint: [需求名称] [TASK-ID]
 
   **读取任务笔记**
   - 如果不存在 `./docs/implements/{需求名称}/{{task_id}}/note.md`:
-    - 使用 @task 执行 `/tsumiki:tdd-tasknote {需求名称} {{task_id}}` 命令生成笔记
+    - 使用 @task 执行 `/jimu:tdd-tasknote {需求名称} {{task_id}}` 命令生成笔记
     - 读取生成的笔记文件
   - 笔记包含技术栈、开发规则、相关实现、设计文档、注意事项
 
@@ -87,7 +87,7 @@ argument-hint: [需求名称] [TASK-ID]
   - 在TODO内容中反映测试用例定义阶段的完成
   - 将下一阶段"Red阶段(创建失败测试)"添加到TODO
   - 在TODO内容中记录质量判定结果
-- 显示下一步: "推荐的下一步: 使用 `/tsumiki:tdd-red {需求名称} {{TASK-ID}}` 开始Red阶段(创建失败测试)。"
+- 显示下一步: "推荐的下一步: 使用 `/jimu:tdd-red {需求名称} {{TASK-ID}}` 开始Red阶段(创建失败测试)。"
 
 # rules
 
