@@ -1,21 +1,21 @@
-# Tsumiki - AI 驱动开发支持框架
+# Jimu - 基于 Tsumiki 中文化的 AI 驱动开发支持框架
 
-Tsumiki 是一个用于 AI 驱动开发的框架。提供从需求定义到实现,利用 AI 的高效开发流程。
+Jimu 是一个基于 Tsumiki 中文化的用于 AI 驱动开发的框架。提供从需求定义到实现,利用 AI 的高效开发流程。
 
 基本上支持 Claude Code,但也可以与其他工具一起使用。请参考 [在 Claude Code 以外的工具中使用 tsumiki](#在-claude-code-以外的工具中使用-tsumiki)。
 
 ## 安装
 
-要使用 Tsumiki,请使用以下 Claude Code Plugin 命令安装:
+要使用 Jimu,请使用以下 Claude Code Plugin 命令安装:
 
 ```bash
-/plugin marketplace add https://github.com/classmethod/tsumiki.git
-/plugin install tsumiki@tsumiki
+/plugin marketplace add https://github.com/tetrisKun/jimu.git
+/plugin install jimu@jimu
 ```
 
-执行此命令后,Tsumiki 的 Claude Code 斜杠命令和代理将自动安装。
+执行此命令后,Jimu 的 Claude Code 斜杠命令和代理将自动安装。
 
-**注意**: 命令使用 `/tsumiki:` 前缀执行(例: `/tsumiki:kairo-requirements`)。
+**注意**: 命令使用 `/jimu:` 前缀执行(例: `/jimu:kairo-requirements`)。
 
 ## 概述
 
@@ -59,52 +59,52 @@ Kairo 自动化·支持从需求定义到实现的开发流程。支持以下开
 
 ## 快速开始
 
-**注意**: 如果使用 Claude Code Plugin 安装,请在每个命令前添加 `tsumiki:`(例: `/tsumiki:kairo-requirements`)。
+**注意**: 如果使用 Claude Code Plugin 安装,请在每个命令前添加 `tsumiki:`(例: `/jimu:kairo-requirements`)。
 
 ### 综合开发流程
 
 ```bash
 # 1. 技术栈初始化
-/tsumiki:init-tech-stack
+/jimu:init-tech-stack
 
 # 2. 需求定义
-/tsumiki:kairo-requirements
+/jimu:kairo-requirements
 
 # 3. 设计
-/tsumiki:kairo-design
+/jimu:kairo-design
 
 # 4. 任务分割
-/tsumiki:kairo-tasks
+/jimu:kairo-tasks
 
 # 5. 实现
-/tsumiki:kairo-implement
+/jimu:kairo-implement
 ```
 
 ### 单独 TDD 流程
 
 ```bash
-/tsumiki:tdd-requirements
-/tsumiki:tdd-testcases
-/tsumiki:tdd-red
-/tsumiki:tdd-green
-/tsumiki:tdd-refactor
-/tsumiki:tdd-verify-complete
+/jimu:tdd-requirements
+/jimu:tdd-testcases
+/jimu:tdd-red
+/jimu:tdd-green
+/jimu:tdd-refactor
+/jimu:tdd-verify-complete
 ```
 
 ### 逆向工程
 
 ```bash
 # 1. 从现有代码分析任务结构
-/tsumiki:rev-tasks
+/jimu:rev-tasks
 
 # 2. 逆向生成设计文档(建议在任务分析后执行)
-/tsumiki:rev-design
+/jimu:rev-design
 
 # 3. 逆向生成测试规范(建议在设计文档后执行)
-/tsumiki:rev-specs
+/jimu:rev-specs
 
 # 4. 逆向生成需求定义书(建议在完成所有分析后执行)
-/tsumiki:rev-requirements
+/jimu:rev-requirements
 ```
 
 ## 在 Claude Code 以外的工具中使用 tsumiki
