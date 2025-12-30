@@ -1,23 +1,23 @@
 {
   "name": "jimu",
   "owner": {
-    "name": "makoto kuroeda",
-    "email": "kuroeda.makoto@classmethod.jp",
-    "url": "https://github.com/classmethod"
+    "name": "tetrisKun",
+    "email": "tetris1128@outlook.com",
+    "url": "https://github.com/tetrisKun"
   },
   "metadata": {
-    "description": "基于 AI 的开发工具包，用于 TDD 和 SDD 工作流程，提供全面的命令模板和代理，以提升开发者的生产力，配合 Claude Code 使用",
+    "description": "基于 Tsumiki 中文化的 AI 的开发工具包，用于 TDD 和 SDD 工作流程，提供全面的命令模板和代理，以提升开发者的生产力，配合 Claude Code 使用",
     "version": "0.0.7"
   },
   "plugins": [
     {
-      "name": "tsumiki",
+      "name": "jimu",
       "source": "./",
-      "description": "基于 AI 的开发工具包，用于 TDD 和 SDD 工作流程，提供全面的命令模板和代理，以提升开发者的生产力，配合 Claude Code 使用",
+      "description": "基于 Tsumiki 中文化的 AI 的开发工具包，用于 TDD 和 SDD 工作流程，提供全面的命令模板和代理，以提升开发者的生产力，配合 Claude Code 使用",
       "version": "0.0.7",
       "author": {
-        "name": "makoto kuroeda",
-        "email": "kuroeda.makoto@classmethod.jp"
+        "name": "tetrisKun",
+        "email": "tetris1128@outlook.com"
       },
       "homepage": "https://github.com/tetrisKun/jimu",
       "repository": "https://github.com/tetrisKun/jimu",
