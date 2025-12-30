@@ -122,7 +122,7 @@ Green阶段文件=./docs/implements/{需求名称}/{{task_id}}/{feature_name}-gr
   - 在TODO内容中记录质量判定结果
   - 添加下一阶段"Refactor阶段(质量改善)"到TODO
 
-- **自动过渡判定**: 如果满足以下条件,自动执行 `/tsumiki:tdd-refactor {需求名称} {TASK-ID}`
+- **自动过渡判定**: 如果满足以下条件,自动执行 `/jimu:tdd-refactor {需求名称} {TASK-ID}`
   - 使用Task工具确认所有测试都已成功
   - 实现简洁易懂
   - 有明显的重构部分
