@@ -1,6 +1,6 @@
 # 贡献指南
 
-感谢您对 Tsumiki 项目的贡献!本指南将说明如何为项目做出贡献。
+感谢您对 Jimu 项目的贡献!本指南将说明如何为项目做出贡献。
 
 ## 开发环境设置
 
@@ -14,8 +14,8 @@
 1. Fork 并克隆仓库:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/tsumiki.git
-cd tsumiki
+git clone https://github.com/YOUR_USERNAME/jimu.git
+cd jimu
 ```
 
 2. 安装依赖:
@@ -135,7 +135,7 @@ git push origin feature/your-feature-name
 
 ## Issue 报告
 
-我们在 [Issues](https://github.com/classmethod/tsumiki/issues) 接受 Bug 报告和功能建议。
+我们在 [Issues](https://github.com/tetrisKun/jimu/issues) 接受 Bug 报告和功能建议。
 
 ### Bug 报告
 
@@ -166,7 +166,7 @@ git push origin feature/your-feature-name
 
 ## 问题与支持
 
-- [Issues](https://github.com/classmethod/tsumiki/issues) - Bug 报告、功能建议
-- [Discussions](https://github.com/classmethod/tsumiki/discussions) - 问题、讨论
+- [Issues](https://github.com/tetrisKun/jimu/issues) - Bug 报告、功能建议
+- [Discussions](https://github.com/tetrisKun/jimu/discussions) - 问题、讨论
 
 期待您的贡献!
