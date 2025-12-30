@@ -1,105 +1,105 @@
-# デフォルト技術スタック定義
+# 默认技术栈定义
 
-プロジェクト専用の技術スタック定義ファイルが見つからない場合に使用されるデフォルト定義です。
+在找不到项目专用的技术栈定义文件时使用的默认定义。
 
-## 優先順位
+## 优先级
 
-1. **プロジェクト専用**: `docs/tech-stack.md`
-2. **プロジェクト共通**: `CLAUDE.md` の技術スタックセクション  
-3. **デフォルト**: この定義ファイル
+1. **项目专用**: `docs/tech-stack.md`
+2. **项目通用**: `CLAUDE.md` 的技术栈部分
+3. **默认**: 本定义文件
 
-## デフォルト技術スタック
+## 默认技术栈
 
-### フロントエンド
-- **フレームワーク**: React 18+ または Vue 3+ または Next.js
-- **言語**: TypeScript 5.0+
-- **状態管理**: Redux Toolkit または Zustand または Pinia
-- **UIライブラリ**: Material-UI または Tailwind CSS または shadcn/ui
-- **バンドラー**: Vite または Webpack
+### 前端
+- **框架**: React 18+ 或 Vue 3+ 或 Next.js
+- **语言**: TypeScript 5.0+
+- **状态管理**: Redux Toolkit 或 Zustand 或 Pinia
+- **UI库**: Material-UI 或 Tailwind CSS 或 shadcn/ui
+- **打包工具**: Vite 或 Webpack
 
-### バックエンド
-- **フレームワーク**: Express.js または Fastify または Next.js API Routes
-- **言語**: TypeScript 5.0+ または JavaScript ES2022+
-- **データベース**: PostgreSQL 15+ または MySQL 8+ または SQLite
-- **ORM**: Prisma または TypeORM または Drizzle
-- **認証**: JWT または NextAuth.js
+### 后端
+- **框架**: Express.js 或 Fastify 或 Next.js API Routes
+- **语言**: TypeScript 5.0+ 或 JavaScript ES2022+
+- **数据库**: PostgreSQL 15+ 或 MySQL 8+ 或 SQLite
+- **ORM**: Prisma 或 TypeORM 或 Drizzle
+- **认证**: JWT 或 NextAuth.js
 
-### キャッシュ・セッション
-- **キャッシュ**: Redis 7+ または Memcached
-- **セッション**: Redis または MemoryStore
+### 缓存・会话
+- **缓存**: Redis 7+ 或 Memcached
+- **会话**: Redis 或 MemoryStore
 
-### 開発環境
-- **コンテナ**: Docker + Docker Compose
-- **パッケージマネージャー**: npm または yarn または pnpm
+### 开发环境
+- **容器**: Docker + Docker Compose
+- **包管理器**: npm 或 yarn 或 pnpm
 - **Node.js**: 18+ LTS
 
-### 開発ツール
-- **テストフレームワーク**: Jest または Vitest
-- **テストライブラリ**: Testing Library または Playwright
-- **リンター**: ESLint + Prettier
-- **型チェック**: TypeScript
-- **CI/CD**: GitHub Actions または GitLab CI
+### 开发工具
+- **测试框架**: Jest 或 Vitest
+- **测试库**: Testing Library 或 Playwright
+- **代码检查**: ESLint + Prettier
+- **类型检查**: TypeScript
+- **CI/CD**: GitHub Actions 或 GitLab CI
 
-### デプロイ・インフラ
-- **フロントエンド**: Vercel または Netlify または Cloudflare Pages
-- **バックエンド**: Railway または Heroku または AWS または GCP
-- **データベース**: PostgreSQL (管理型) または自己管理
-- **CDN**: Cloudflare または AWS CloudFront
+### 部署・基础设施
+- **前端**: Vercel 或 Netlify 或 Cloudflare Pages
+- **后端**: Railway 或 Heroku 或 AWS 或 GCP
+- **数据库**: PostgreSQL (托管型) 或 自管理
+- **CDN**: Cloudflare 或 AWS CloudFront
 
-## API設計
-- **アーキテクチャ**: RESTful API または GraphQL
-- **ドキュメント**: OpenAPI/Swagger または GraphQL Schema
-- **認証方式**: Bearer Token (JWT) または API Key
+## API 设计
+- **架构**: RESTful API 或 GraphQL
+- **文档**: OpenAPI/Swagger 或 GraphQL Schema
+- **认证方式**: Bearer Token (JWT) 或 API Key
 
-## データ管理
-- **データベース設計**: 正規化 + 必要に応じて非正規化
-- **マイグレーション**: Prisma Migrate または TypeORM Migrations
-- **バックアップ**: 自動バックアップ推奨
+## 数据管理
+- **数据库设计**: 规范化 + 必要时非规范化
+- **迁移**: Prisma Migrate 或 TypeORM Migrations
+- **备份**: 推荐自动备份
 
-## セキュリティ
-- **HTTPS**: 必須
-- **CORS**: 適切な設定
-- **認証**: JWT + Refresh Token パターン
-- **バリデーション**: サーバーサイドバリデーション必須
-- **環境変数**: 機密情報の適切な管理
+## 安全性
+- **HTTPS**: 必需
+- **CORS**: 适当配置
+- **认证**: JWT + Refresh Token 模式
+- **验证**: 服务器端验证必需
+- **环境变量**: 机密信息的适当管理
 
-## パフォーマンス要件
-- **API応答時間**: 3秒以内
-- **フロントエンド初期表示**: 2秒以内
-- **データベースクエリ**: インデックス最適化
-- **キャッシュ戦略**: 適切なTTL設定
+## 性能要求
+- **API 响应时间**: 3秒以内
+- **前端首屏加载**: 2秒以内
+- **数据库查询**: 索引优化
+- **缓存策略**: 适当的 TTL 设置
 
-## 品質基準
-- **テストカバレッジ**: 80%以上推奨
-- **コード品質**: ESLint + Prettier
-- **型安全性**: TypeScript strict mode
-- **アクセシビリティ**: WCAG 2.1 AA準拠推奨
+## 质量标准
+- **测试覆盖率**: 80%以上推荐
+- **代码质量**: ESLint + Prettier
+- **类型安全**: TypeScript strict mode
+- **无障碍**: 符合 WCAG 2.1 AA 推荐
 
-## ディレクトリ構造（推奨）
+## 目录结构（推荐）
 
 ```
 project/
-├── docs/                    # ドキュメント
-│   ├── spec/               # 要件定義
-│   ├── design/             # 設計文書
-│   └── tasks/              # タスク管理
-├── src/                    # ソースコード
-│   ├── components/         # UIコンポーネント
-│   ├── services/           # ビジネスロジック
-│   ├── types/              # 型定義
-│   └── utils/              # ユーティリティ
-├── tests/                  # テストファイル
-├── prisma/                 # データベーススキーマ
-├── docker-compose.yml      # 開発環境
-└── package.json           # 依存関係
+├── docs/                    # 文档
+│   ├── spec/               # 需求定义
+│   ├── design/             # 设计文档
+│   └── tasks/              # 任务管理
+├── src/                    # 源代码
+│   ├── components/         # UI 组件
+│   ├── services/           # 业务逻辑
+│   ├── types/              # 类型定义
+│   └── utils/              # 工具函数
+├── tests/                  # 测试文件
+├── prisma/                 # 数据库模式
+├── docker-compose.yml      # 开发环境
+└── package.json           # 依赖关系
 ```
 
 ## 使用方法
 
-このデフォルト定義は以下の場合に参照されます：
+以下情况下会参考此默认定义：
 
-1. `docs/tech-stack.md` が存在しない
-2. `CLAUDE.md` に技術スタック情報がない
-3. 新規プロジェクトの初期設定
+1. 不存在 `docs/tech-stack.md`
+2. `CLAUDE.md` 中无技术栈信息
+3. 新建项目的初始设置
 
-プロジェクト固有の技術選択がある場合は、`docs/tech-stack.md` を作成して上書きしてください。
+如果项目有特定的技术选择，请创建 `docs/tech-stack.md` 来覆盖此定义。
