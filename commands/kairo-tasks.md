@@ -68,7 +68,7 @@ argument-hint: [需求名称]
 - **读取任务笔记**
   - 如果`docs/spec/{需求名称}/note.md`存在则读取
   - 如果不存在:
-    - 使用Task工具执行subagent_type: "general-purpose"来运行`/tsumiki:kairo-tasknote {需求名称}`命令生成笔记
+    - 使用Task工具执行subagent_type: "general-purpose"来运行`/jimu:kairo-tasknote {需求名称}`命令生成笔记
     - 读取生成的笔记文件
   - 笔记包含技术栈、开发规则、相关实现、设计文档、注意事项
 
@@ -334,7 +334,7 @@ argument-hint: [需求名称]
 - 任务总数、预计工时、阶段数
 - 确认各文件内的链接设置正确
 
-显示下一步骤:"推荐的下一步骤:使用`/tsumiki:kairo-implement`实现任务。要实现特定任务请像`/tsumiki:kairo-implement TASK-0001`这样指定。"
+显示下一步骤:"推荐的下一步骤:使用`/jimu:kairo-implement`实现任务。要实现特定任务请像`/jimu:kairo-implement TASK-0001`这样指定。"
 
 # rules
 
@@ -417,16 +417,16 @@ argument-hint: [需求名称]
 ## 任务过程定义
 
 ### TDD任务
-1. `/tsumiki:tdd-requirements` - 详细需求定义
-2. `/tsumiki:tdd-testcases` - 测试用例创建
-3. `/tsumiki:tdd-red` - 测试实现(失败)
-4. `/tsumiki:tdd-green` - 最小实现
-5. `/tsumiki:tdd-refactor` - 重构
-6. `/tsumiki:tdd-verify-complete` - 质量确认
+1. `/jimu:tdd-requirements` - 详细需求定义
+2. `/jimu:tdd-testcases` - 测试用例创建
+3. `/jimu:tdd-red` - 测试实现(失败)
+4. `/jimu:tdd-green` - 最小实现
+5. `/jimu:tdd-refactor` - 重构
+6. `/jimu:tdd-verify-complete` - 质量确认
 
 ### DIRECT任务
-1. `/tsumiki:direct-setup` - 直接实现·设置
-2. `/tsumiki:direct-verify` - 动作确认·质量确认
+1. `/jimu:direct-setup` - 直接实现·设置
+2. `/jimu:direct-verify` - 动作确认·质量确认
 
 # info
 
@@ -679,8 +679,8 @@ TASK-0001 → TASK-0002 → TASK-0011 → TASK-0012 → TASK-0021 → TASK-0031 
 ## 下一步骤
 
 要实现任务:
-- 按顺序实现全任务: `/tsumiki:kairo-implement`
-- 实现特定任务: `/tsumiki:kairo-implement TASK-0001`
+- 按顺序实现全任务: `/jimu:kairo-implement`
+- 实现特定任务: `/jimu:kairo-implement TASK-0001`
 </overview_template>
 
 <full_task_template>
@@ -821,17 +821,17 @@ describe('{测试对象}', () => {
 
 ### TDD任务的情况
 
-1. `/tsumiki:tdd-requirements TASK-{编号}` - 详细需求定义
-2. `/tsumiki:tdd-testcases` - 测试用例创建
-3. `/tsumiki:tdd-red` - 测试实现(失败)
-4. `/tsumiki:tdd-green` - 最小实现
-5. `/tsumiki:tdd-refactor` - 重构
-6. `/tsumiki:tdd-verify-complete` - 质量确认
+1. `/jimu:tdd-requirements TASK-{编号}` - 详细需求定义
+2. `/jimu:tdd-testcases` - 测试用例创建
+3. `/jimu:tdd-red` - 测试实现(失败)
+4. `/jimu:tdd-green` - 最小实现
+5. `/jimu:tdd-refactor` - 重构
+6. `/jimu:tdd-verify-complete` - 质量确认
 
 ### DIRECT任务的情况
 
-1. `/tsumiki:direct-setup` - 直接实现·设置
-2. `/tsumiki:direct-verify` - 动作确认·质量确认
+1. `/jimu:direct-setup` - 直接实现·设置
+2. `/jimu:direct-verify` - 动作确认·质量确认
 
 ---
 
@@ -928,17 +928,17 @@ describe('{测试对象}', () => {
 
 ### TDD任务的情况
 
-1. `/tsumiki:tdd-requirements TASK-{编号}` - 详细需求定义
-2. `/tsumiki:tdd-testcases` - 测试用例创建
-3. `/tsumiki:tdd-red` - 测试实现(失败)
-4. `/tsumiki:tdd-green` - 最小实现
-5. `/tsumiki:tdd-refactor` - 重构
-6. `/tsumiki:tdd-verify-complete` - 质量确认
+1. `/jimu:tdd-requirements TASK-{编号}` - 详细需求定义
+2. `/jimu:tdd-testcases` - 测试用例创建
+3. `/jimu:tdd-red` - 测试实现(失败)
+4. `/jimu:tdd-green` - 最小实现
+5. `/jimu:tdd-refactor` - 重构
+6. `/jimu:tdd-verify-complete` - 质量确认
 
 ### DIRECT任务的情况
 
-1. `/tsumiki:direct-setup` - 直接实现·设置
-2. `/tsumiki:direct-verify` - 动作确认·质量确认
+1. `/jimu:direct-setup` - 直接实现·设置
+2. `/jimu:direct-verify` - 动作确认·质量确认
 
 ---
 
